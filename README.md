@@ -15,11 +15,20 @@ I designed the UI in Figma. I tried my best to design from the end-experience; t
 
 Here are the first drafts for Desktop, phone portrait, and phone landscape screens.
 
-![Alt text](/ReadMe Assets/Desktop Design.png?raw=true "Desktop Screen")
+---
+#### Desktop
+<img src="https://github.com/bgevko/DataGen/blob/main/readme-img/desktop.png" width=50%>
 
-![Alt text](/ReadMe Assets/Phone Landscape Design.png?raw=true "Mobile Portrait")
+---
+#### Mobile Portrait
+<img src="https://github.com/bgevko/DataGen/blob/main/readme-img/phone2.png" width=20%>
 
-![Alt text](/ReadMe Assets/Phone Portrait Design.png?raw=true "Mobile Landscape")
+---
+#### Mobile Landscape
+<img src="https://github.com/bgevko/DataGen/blob/main/readme-img/phone1.png" width=50%>
+
+---
+
 
 People don't develop on mobile ([or do they?](https://9to5mac.com/2021/06/07/ipados-15-you-can-now-build-apps-on-the-ipad-and-ship-to-the-app-store/)), so why am I making a design for the mobile screen? Although I have no intention of anyone using this on their phone, I want the layout to be responsive and look good on all screen sizes. Also, if you want to use this on your mobile screen for some reason, it should be as easy to use as on the desktop (in theory). 
 
