@@ -1,54 +1,24 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# DataGen
+DataGen is an open-source random data generator. Many very well-built random data generators already exist, so why did I build my own? Because I thought that I could improve the design to suit my workflow specifically. 
 
-## 🚀 Quick start
+## Intended use
+The primary purpose of this tool is to open the web page and immediately have JSON data that you can copy directly into your IDE. There are some options for customizability, but the primary goal of the design is to keep the user's focus on the coding task. It's meant to be used as a side tab in the browser, where you switch to it for a few seconds, hit copy, then paste the data into the IDE. 
 
-1.  **Create a Gatsby site.**
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+# DevLog
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+### Dec 4, 2022
+I designed the UI in Figma. I tried my best to design from the end-experience; that is, focusing on the following priorities:
+1. Convenience and usability
+2. Expandability
+3. UI clarity and "beauty"
 
-2.  **Start developing.**
+Here are the first drafts for Desktop, phone portrait, and phone landscape screens.
 
-    Navigate into your new site’s directory and start it up.
+**Desktop image goes here**
+**Mobile portrait goes here**
+**Mobile landscape goes here.**
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+People don't develop on mobile, so why am I making a design for the mobile screen? Although I have no intention of anyone using this on their phone, I want the layout to be responsive and look good on all screen sizes. Also, if you want to use this on your mobile screen for some reason, it should be as easy to use as on the desktop (in theory). 
 
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+Of course, this is not a comprehensive design. I do not yet know what limitations I will run into when I begin implementing it, but it is a good starting point. 
