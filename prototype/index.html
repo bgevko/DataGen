@@ -50,7 +50,7 @@
     }
 
     /* Make the scrollbar visible for now */
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
       -webkit-appearance: none;
       width: 6px;
     }
@@ -59,7 +59,7 @@
       border-radius: 4px;
       background-color: blue;
       -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-    }
+    } */
 
     /* Stacking context for react */
     #root, #__next {
@@ -84,6 +84,7 @@
       /* Size */
       background-color: aquamarine;
       width: 10%;
+      max-width: 80px;
       height: 100vh;
 
       /* Alignment */
@@ -97,6 +98,7 @@
       /* Size */
       background-color: beige;
       width: 30%;
+      max-width: 300px;
       height: 100vh;
 
       /* Scroll bar */
@@ -120,6 +122,16 @@
       flex-direction: column;
     }
 
+    .options-section {
+      /* Size */
+      background-color: cornflowerblue;
+
+      /* Alignment */
+      display: flex;
+      flex-direction: column;
+      
+    }
+
     .new-item-container {
       /* Size */
       background-color: cadetblue;
@@ -135,6 +147,7 @@
       /* Size */
       background-color: brown;
       width: 100%;
+      max-width: 900px;
       height: 100vh;
 
       /* Alignment */
@@ -186,6 +199,7 @@
       /* Size */
       background-color: violet;
       width: 10%;
+      max-width: 60px;
 
       /* Alignment */
       display: flex;
@@ -195,13 +209,62 @@
       /* Size */
       background-color: darkgreen;
       height: 10%;
-      min-height: 10%;
+      min-height: 30px;
+      max-height: 50px;
 
       /* Alignment */
       display: flex;
       flex-direction: row;
       align-items: center;
     }
+
+    /* Media Queries */
+    @media screen and (max-width: 700px) and (orientation: portrait){
+      .content-container {
+        /* Size */
+
+        /* Alignment */
+        flex-direction: column;
+      }
+
+      .navbar {
+        /* Size */
+        height: 6vh;
+        width: 100%;
+        max-width: 100%;
+
+        /* Alignment */
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        order: 1;
+      }
+
+      .main-section {
+        /* Size */
+        height: 30vh;
+
+        /* Alignment */
+        order: 2;
+      }
+
+      .side-section {
+        /* Size */
+        width: 100%;
+        max-width: 100%;
+        height: 30%;
+
+        /* Alignment */
+        order: 3;
+      }
+
+      .options-container {
+
+        /* Alignment */
+        flex-direction: row;
+      }
+    }
+
   </style>
 </head>
 
@@ -228,68 +291,113 @@
     <aside class="side-section">
       <h4>Quick Options</h4>
       <div class="options-container">
-        <span>
-          <input type="checkbox" name="option1" value="option1">
-          <label for="option1">Option1</label>
-        </span>
+        <div class="options-section">
+          <span>
+            <input type="checkbox" name="option1" value="option1">
+            <label for="option1">Option1</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option2" value="option2">
+            <label for="option2">Option2</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option3" value="option3">
+            <label for="option3">Option3</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option4" value="option4">
+            <label for="option4">Option4</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option5" value="option5">
+            <label for="option5">Option5</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option6" value="option6">
+            <label for="option6">Option6</label>
+          </span>
+        </div>
 
-        <span>
-          <input type="checkbox" name="option2" value="option2">
-          <label for="option2">Option2</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option3" value="option3">
-          <label for="option3">Option3</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option4" value="option4">
-          <label for="option4">Option4</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option5" value="option5">
-          <label for="option5">Option5</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option6" value="option6">
-          <label for="option6">Option6</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option7" value="option7">
-          <label for="option7">Option7</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option8" value="option8">
-          <label for="option8">Option8</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option9" value="option9">
-          <label for="option9">Option9</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option10" value="option10">
-          <label for="option10">Option10</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option11" value="option11">
-          <label for="option11">Option11</label>
-        </span>
-
-        <span>
-          <input type="checkbox" name="option12" value="option12">
-          <label for="option12">Option12</label>
-        </span>
-
+        <div class="options-section">
+          <span>
+            <input type="checkbox" name="option7" value="option7">
+            <label for="option7">Option7</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option8" value="option8">
+            <label for="option8">Option8</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option9" value="option9">
+            <label for="option9">Option9</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option10" value="option10">
+            <label for="option10">Option10</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option11" value="option11">
+            <label for="option11">Option11</label>
+          </span>
+  
+          <span>
+            <input type="checkbox" name="option12" value="option12">
+            <label for="option12">Option12</label>
+          </span>
+        </div>
       </div>
       <div class="new-item-container">
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
+        <span>
+          New Item Form
+        </span>
         <span>
           New Item Form
         </span>
