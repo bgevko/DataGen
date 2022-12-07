@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quickly generate random JSON data with just one click. Perfect for testing and development purposes. Copy the data directly into your IDE and get started right away.">
+
+  <!-- Font-->
+  <link href='<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700' rel='stylesheet'>
 
   <title>DataGen Prototype</title>
 
@@ -44,21 +48,8 @@
     }
 
     /* Improved media defaults */
-    img, picture, video, canvas, svg {
+    /* img, picture, video, canvas, svg {
       display: block;
-      max-width: 100%;
-    }
-
-    /* Make the scrollbar visible for now */
-    /* ::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background-color: blue;
-      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
     } */
 
     /* Stacking context for react */
@@ -70,9 +61,25 @@
 
     /* ------- App Layout ------- */
 
+    .page-header {
+      /* Size */
+      height: 2rem;
+
+      /* Alignment */
+      padding-bottom: var(--border-distance-short);
+      padding-left: 6rem;
+    }
+
+    .header-border {
+      /* Size */
+      height: 100%;
+      width: 100%;
+
+      /* Border */
+      border-bottom: 1px var(--theme-medium) solid;
+    }
     .content-container {
       /* Size */
-      background-color: aqua;
 
       /* Alignment */
       display: flex;
@@ -82,9 +89,9 @@
     
     .navbar {
       /* Size */
-      background-color: aquamarine;
       width: 10%;
-      max-width: 80px;
+      min-width: 60px;
+      max-width: 90px;
       height: 100vh;
 
       /* Alignment */
@@ -92,11 +99,25 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      padding: var(--border-distance-short) 0;
     }
 
+    .icon-container {
+      /* Size */
+      height: 40px;
+
+      /* Alignment */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .icon {
+      /* Size */
+      height: 30px;
+    }
     .side-section {
       /* Size */
-      background-color: beige;
       width: 30%;
       max-width: 300px;
       height: 100vh;
@@ -109,32 +130,87 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
+      padding-left: var(--border-distance-medium);
+      padding-right: var(--border-distance-medium);
+      padding-top: var(--border-distance-short);
+    }
+
+    .aside-title-text {
+      margin-bottom: var(--border-distance-short);
+      font-weight: 700;
     }
 
     .options-container {
       /* Size */
-      background-color: azure;
       width: 100%;
       height: auto;
 
       /* Alignment */
       display: flex;
       flex-direction: column;
+      padding-bottom: var(--border-distance-short);
+    }
+
+    .size-options-container {
+      /* Alignment */
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
 
     .options-section {
       /* Size */
-      background-color: cornflowerblue;
-
+      
       /* Alignment */
       display: flex;
       flex-direction: column;
-      
+    }
+
+    .option-item {
+      /* Size */
+      height: 2rem;
+
+      /* Alignment */
+      display: flex;
+      margin-bottom: var(--border-distance-shorter);
+    }
+
+    .option-visible-portion {
+      /* Size */
+      width: 100%;
+
+      /* Alignment options */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .size-option-visible-portion {
+      /* Size */
+      width: 20%;
+      min-width: 40px;
+      max-width: 50px;
+
+      /* Alignment options */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sizes-container {
+      /* Size */
+      width: 100%;
+
+      /* Alignment options */
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--border-distance-short);
+      padding-bottom: var(--border-distance-short);
+
     }
 
     .new-item-container {
       /* Size */
-      background-color: cadetblue;
       width: 100%;
       height: auto;
 
@@ -205,6 +281,7 @@
       display: flex;
       flex-direction: column;
     }
+
     .text-area-footer {
       /* Size */
       background-color: darkgreen;
@@ -219,7 +296,7 @@
     }
 
     /* Media Queries */
-    @media screen and (max-width: 700px) and (orientation: portrait){
+    @media screen and (max-width: 700px) and (orientation: portrait) {
       .content-container {
         /* Size */
 
@@ -265,96 +342,252 @@
       }
     }
 
+
+    /* ---------- App Styling ----------- */
+
+    :root {
+       /* Theme colors */
+      --theme-light: #f3f3f3;
+      --theme-medium: #d1d1d1;
+      --theme-dark: #a8a8a8;
+      --theme-darker: #797979;
+
+      /* Sizes */
+      --border-distance-shorter: 0.3rem;
+      --border-distance-short: 0.5rem;
+      --border-distance-medium: 1rem;
+
+      /* Font sizes */
+      --smallest: .7rem;
+      --small: .8rem;
+      --normal: 1rem;
+    }
+
+    /* Theme font */
+    body {
+      font-family: 'Open Sans';
+      font-size: 16px;
+      color: var(--theme-darker);
+    }
+
+    .navbar {
+      /* Border */
+      border-right: 1px solid var(--theme-medium);
+    }
+
+    .options-container {
+      /* Border */
+      border-bottom: 1px solid var(--theme-medium);
+    }
+    
+    .checkbox {
+      /* Hide the default checkbox */
+      width: 0;
+      height: 0;
+    }
+
+    .option-item {
+      /* Mouse over */
+      cursor: pointer;
+    }
+
+    .option-visible-portion {
+      /* Default border */
+      border: 1px var(--theme-medium) solid;
+      border-radius: 6px;
+    }
+
+    .size-option-visible-portion {
+      /* Default border */
+      border: 1px var(--theme-medium) solid;
+      border-radius: 6px;
+    }
+
+    .checkbox:checked + span {
+      /* Option button checked */
+      background-color: var(--theme-darker);
+      color: var(--theme-light);
+      border: 1px var(--theme-darker) solid;
+    }
+
+    .option-text {
+      font-size: var(--small);
+    }
+
+    .sizes-container {
+       /* Border */
+       border-bottom: 1px solid var(--theme-medium);
+    }
+
   </style>
 </head>
 
 <body>
 
+  <!-- Header component -->
+  <header class="page-header">
+    <div class="header-border"></div>
+  </header>
+
   <!-- Content container, wraps all content -->
   <div class="content-container">
 
-    <!-- Header component -->
-    <header>
-    </header>
-
     <!-- Navbar component -->
     <nav class="navbar">
-      <span>
-        icon
+      <span class="icon-container">
+        <a href="#" class="icon-link">
+          <img src="../src/images/b.svg" alt="icon" class="icon">
+        </a>
       </span>
-      <span>
-        icon
-      </span>
+        
+      </a>
+      <a href="#" class="icon-link">
+        <span class="icon-container">
+          <img src="../src/images/settings.svg" alt="icon" class="icon">
+        </span>
+      </a>
     </nav>
 
     <!-- Aside component -->
     <aside class="side-section">
-      <h4>Quick Options</h4>
+      <h4 class="aside-title-text">Quick Options</h4>
+
       <div class="options-container">
-        <div class="options-section">
-          <span>
-            <input type="checkbox" name="option1" value="option1">
-            <label for="option1">Option1</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option2" value="option2">
-            <label for="option2">Option2</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option3" value="option3">
-            <label for="option3">Option3</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option4" value="option4">
-            <label for="option4">Option4</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option5" value="option5">
-            <label for="option5">Option5</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option6" value="option6">
-            <label for="option6">Option6</label>
-          </span>
-        </div>
 
         <div class="options-section">
-          <span>
-            <input type="checkbox" name="option7" value="option7">
-            <label for="option7">Option7</label>
-          </span>
+
+          <!-- Button 1 -->
+          <label class="option-item">
+            <input type="checkbox" name="option1" value="option1" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option1</p>
+            </span>
+          </label>
   
-          <span>
-            <input type="checkbox" name="option8" value="option8">
-            <label for="option8">Option8</label>
-          </span>
+          <label class="option-item">
+            <input type="checkbox" name="option2" value="option2" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option2</p>
+            </span>
+          </label>
   
-          <span>
-            <input type="checkbox" name="option9" value="option9">
-            <label for="option9">Option9</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option10" value="option10">
-            <label for="option10">Option10</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option11" value="option11">
-            <label for="option11">Option11</label>
-          </span>
-  
-          <span>
-            <input type="checkbox" name="option12" value="option12">
-            <label for="option12">Option12</label>
-          </span>
+          <label class="option-item">
+            <input type="checkbox" name="option3" value="option3" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option3</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option4" value="option4" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option4</p>
+            </span>
+          </label>
+
+          <!-- <label class="option-item">
+            <input type="checkbox" name="option5" value="option5" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option5</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option6" value="option6" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option6</p>
+            </span>
+          </label> -->
+        </div>
+
+        <!-- <div class="options-section">
+          <label class="option-item">
+            <input type="checkbox" name="option7" value="option7" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option7</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option8" value="option8" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option8</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option9" value="option9" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option9</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option10" value="option10" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option10</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option11" value="option11" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option11</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" name="option12" value="option12" class="checkbox">
+            <span class="option-visible-portion">
+              <p class="option-text">Option12</p>
+            </span>
+          </label>
+        </div> -->
+      </div>
+
+      <div class="sizes-container">
+        <h4 class="aside-title-text">Set Size</h4>
+        <div class="size-options-container">
+          <label class="option-item">
+            <input type="checkbox" class="checkbox">
+            <span class="size-option-visible-portion">
+              <p class="option-text">5</p>
+            </span>
+          </label>
+          
+          <label class="option-item">
+            <input type="checkbox" class="checkbox">
+            <span class="size-option-visible-portion">
+              <p class="option-text">10</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" class="checkbox">
+            <span class="size-option-visible-portion">
+              <p class="option-text">100</p>
+            </span>
+          </label>
+
+          <label class="option-item">
+            <input type="checkbox" class="checkbox">
+            <span class="size-option-visible-portion">
+              <p class="option-text">1000</p>
+            </span>
+          </label>
+
+        </div>
+        <div class="size-options-container">
+          <label class="option-item">
+            <input type="checkbox" class="checkbox">
+            <span class="size-option-visible-portion">
+              <p class="option-text">Other</p>
+            </span>
+          </label>
+          <span>number</span>
         </div>
       </div>
+
       <div class="new-item-container">
         <span>
           New Item Form
