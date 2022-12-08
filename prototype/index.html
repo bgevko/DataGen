@@ -7,434 +7,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Quickly generate random JSON data with just one click. Perfect for testing and development purposes. Copy the data directly into your IDE and get started right away.">
 
+  <link rel="stylesheet" type="text/css" href="../css/reset.css">
+  <link rel="stylesheet" type="text/css" href="../css/styles.css">
+  <link rel="stylesheet" type="text/css" href="../css/util.css">
   <!-- Font-->
   <link href='<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700' rel='stylesheet'>
 
   <title>DataGen Prototype</title>
-
-  <!-- CSS -->
-  <style>
-    /* ------- Change default settings -------- */
-
-    /* Reset CSS settings */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
-    /* Margins to zero */
-    * {
-      margin: 0;
-    }
-
-    /* Percentage based heights */
-    html, body {
-      height: 100%;
-    }
-
-    /* Accessible typography */
-    body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    }
-
-    /* Remove default form typography styles */
-    input, button, textarea, select {
-      font: inherit;
-    }
-
-    /* Avoid overflow */
-    p, h1, h2, h3, h4, h5, h6 {
-      overflow-wrap: break-word;
-    }
-
-    /* Improved media defaults */
-    /* img, picture, video, canvas, svg {
-      display: block;
-    } */
-
-    /* Stacking context for react */
-    #root, #__next {
-      isolation: isolate;
-    }
-
-    /* ------- End -------- */
-
-    /* ------- App Layout ------- */
-
-    .page-header {
-      /* Size */
-      height: 2rem;
-
-      /* Alignment */
-      padding-bottom: var(--border-distance-short);
-      padding-left: 6rem;
-    }
-
-    .header-border {
-      /* Size */
-      height: 100%;
-      width: 100%;
-
-      /* Border */
-      border-bottom: 1px var(--theme-medium) solid;
-    }
-    .content-container {
-      /* Size */
-
-      /* Alignment */
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-    
-    .navbar {
-      /* Size */
-      width: 10%;
-      min-width: 60px;
-      max-width: 90px;
-      height: 100vh;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--border-distance-short) 0;
-    }
-
-    .icon-container {
-      /* Size */
-      height: 40px;
-
-      /* Alignment */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .icon {
-      /* Size */
-      height: 30px;
-    }
-    .side-section {
-      /* Size */
-      width: 30%;
-      max-width: 300px;
-      height: 100vh;
-
-      /* Scroll bar */
-      overflow: scroll;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      padding-left: var(--border-distance-medium);
-      padding-right: var(--border-distance-medium);
-      padding-top: var(--border-distance-short);
-    }
-
-    .aside-title-text {
-      margin-bottom: var(--border-distance-short);
-      font-weight: 700;
-    }
-
-    .options-container {
-      /* Size */
-      width: 100%;
-      height: auto;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-      padding-bottom: var(--border-distance-short);
-    }
-
-    .size-options-container {
-      /* Alignment */
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    .options-section {
-      /* Size */
-      
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .option-item {
-      /* Size */
-      height: 2rem;
-
-      /* Alignment */
-      display: flex;
-      margin-bottom: var(--border-distance-shorter);
-    }
-
-    .option-visible-portion {
-      /* Size */
-      width: 100%;
-
-      /* Alignment options */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .size-option-visible-portion {
-      /* Size */
-      width: 20%;
-      min-width: 40px;
-      max-width: 50px;
-
-      /* Alignment options */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .sizes-container {
-      /* Size */
-      width: 100%;
-
-      /* Alignment options */
-      display: flex;
-      flex-direction: column;
-      padding-top: var(--border-distance-short);
-      padding-bottom: var(--border-distance-short);
-
-    }
-
-    .new-item-container {
-      /* Size */
-      width: 100%;
-      height: auto;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .main-section {
-      /* Size */
-      background-color: brown;
-      width: 100%;
-      max-width: 900px;
-      height: 100vh;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .main-section-container {
-      /* Size */
-      background-color:darkgoldenrod;
-      width: 95%;
-      height: 95%;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .text-area-container {
-      /* Size */
-      background-color: blueviolet;
-      height: 100%;
-
-      /* Without this, text gets bigger instead of scrolling */
-      overflow: hidden;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: row;
-    }
-
-    .text-area {
-      /* Size */
-      background-color: lightskyblue;
-      width: 100%;
-      height: 100%;
-
-      /* Scroll bar */
-      overflow: scroll;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .text-area-sidebar {
-      /* Size */
-      background-color: violet;
-      width: 10%;
-      max-width: 60px;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .text-area-footer {
-      /* Size */
-      background-color: darkgreen;
-      height: 10%;
-      min-height: 30px;
-      max-height: 50px;
-
-      /* Alignment */
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-
-    /* Media Queries */
-    @media screen and (max-width: 700px) and (orientation: portrait) {
-      .content-container {
-        /* Size */
-
-        /* Alignment */
-        flex-direction: column;
-      }
-
-      .navbar {
-        /* Size */
-        height: 6vh;
-        width: 100%;
-        max-width: 100%;
-
-        /* Alignment */
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        order: 1;
-      }
-
-      .main-section {
-        /* Size */
-        height: 30vh;
-
-        /* Alignment */
-        order: 2;
-      }
-
-      .side-section {
-        /* Size */
-        width: 100%;
-        max-width: 100%;
-        height: 30%;
-
-        /* Alignment */
-        order: 3;
-      }
-
-      .options-container {
-
-        /* Alignment */
-        flex-direction: row;
-      }
-    }
-
-
-    /* ---------- App Styling ----------- */
-
-    :root {
-       /* Theme colors */
-      --theme-light: #f3f3f3;
-      --theme-medium: #d1d1d1;
-      --theme-dark: #a8a8a8;
-      --theme-darker: #797979;
-
-      /* Sizes */
-      --border-distance-shorter: 0.3rem;
-      --border-distance-short: 0.5rem;
-      --border-distance-medium: 1rem;
-
-      /* Font sizes */
-      --smallest: .7rem;
-      --small: .8rem;
-      --normal: 1rem;
-    }
-
-    /* Theme font */
-    body {
-      font-family: 'Open Sans';
-      font-size: 16px;
-      color: var(--theme-darker);
-    }
-
-    .navbar {
-      /* Border */
-      border-right: 1px solid var(--theme-medium);
-    }
-
-    .options-container {
-      /* Border */
-      border-bottom: 1px solid var(--theme-medium);
-    }
-    
-    .checkbox {
-      /* Hide the default checkbox */
-      width: 0;
-      height: 0;
-    }
-
-    .option-item {
-      /* Mouse over */
-      cursor: pointer;
-    }
-
-    .option-visible-portion {
-      /* Default border */
-      border: 1px var(--theme-medium) solid;
-      border-radius: 6px;
-    }
-
-    .size-option-visible-portion {
-      /* Default border */
-      border: 1px var(--theme-medium) solid;
-      border-radius: 6px;
-    }
-
-    .checkbox:checked + span {
-      /* Option button checked */
-      background-color: var(--theme-darker);
-      color: var(--theme-light);
-      border: 1px var(--theme-darker) solid;
-    }
-
-    .option-text {
-      font-size: var(--small);
-    }
-
-    .sizes-container {
-       /* Border */
-       border-bottom: 1px solid var(--theme-medium);
-    }
-
-  </style>
 </head>
 
 <body>
 
   <!-- Header component -->
-  <header class="page-header">
-    <div class="header-border"></div>
+  <header id="page-header">
+    <div class="w-h-100 bb"></div>
   </header>
 
   <!-- Content container, wraps all content -->
-  <div class="content-container">
+  <div class="fr" id="content-container">
 
     <!-- Navbar component -->
-    <nav class="navbar">
-      <span class="icon-container">
+    <nav class="fc jsb ac br" id="navbar">
+      <span class="icon-container fr jc ac">
         <a href="#" class="icon-link">
           <img src="../src/images/b.svg" alt="icon" class="icon">
         </a>
@@ -442,216 +36,178 @@
         
       </a>
       <a href="#" class="icon-link">
-        <span class="icon-container">
+        <span class="icon container fr jc ac">
           <img src="../src/images/settings.svg" alt="icon" class="icon">
         </span>
       </a>
     </nav>
 
     <!-- Aside component -->
-    <aside class="side-section">
+    <aside class="fc" id="side-section">
       <h4 class="aside-title-text">Quick Options</h4>
 
-      <div class="options-container">
-
-        <div class="options-section">
+      <div class="fc w100" id="options-container">
+        <div class="options-section fc w100">
 
           <!-- Button 1 -->
-          <label class="option-item">
-            <input type="checkbox" name="option1" value="option1" class="checkbox">
-            <span class="option-visible-portion">
+          <label class="option-item fr js as">
+            <input type="checkbox" name="option1" value="option1" class="hide-default">
+            <span class="border w-h-100 fr jc ac">
               <p class="option-text">Option1</p>
             </span>
           </label>
   
-          <label class="option-item">
-            <input type="checkbox" name="option2" value="option2" class="checkbox">
-            <span class="option-visible-portion">
+          <label class="option-item fr js as">
+            <input type="checkbox" name="option2" value="option2" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option2</p>
             </span>
           </label>
   
-          <label class="option-item">
-            <input type="checkbox" name="option3" value="option3" class="checkbox">
-            <span class="option-visible-portion">
+          <label class="option-item fr js as">
+            <input type="checkbox" name="option3" value="option3" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option3</p>
             </span>
           </label>
 
-          <label class="option-item">
-            <input type="checkbox" name="option4" value="option4" class="checkbox">
-            <span class="option-visible-portion">
+          <label class="option-item fr js as">
+            <input type="checkbox" name="option4" value="option4" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option4</p>
             </span>
           </label>
 
-          <!-- <label class="option-item">
-            <input type="checkbox" name="option5" value="option5" class="checkbox">
-            <span class="option-visible-portion">
+          <!-- <label class="option-item fr js as">
+            <input type="checkbox" name="option5" value="option5" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option5</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option6" value="option6" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option6</p>
             </span>
           </label> -->
         </div>
 
-        <!-- <div class="options-section">
-          <label class="option-item">
+        <!-- <div class="options-section w100">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option7" value="option7" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option7</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option8" value="option8" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option8</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option9" value="option9" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option9</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option10" value="option10" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option10</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option11" value="option11" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option11</p>
             </span>
           </label>
 
-          <label class="option-item">
+          <label class="option-item fr js as">
             <input type="checkbox" name="option12" value="option12" class="checkbox">
-            <span class="option-visible-portion">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Option12</p>
             </span>
           </label>
         </div> -->
       </div>
 
-      <div class="sizes-container">
+      <div class="fc w100 bb pb-3 pt-2"
         <h4 class="aside-title-text">Set Size</h4>
-        <div class="size-options-container">
-          <label class="option-item">
-            <input type="checkbox" class="checkbox">
-            <span class="size-option-visible-portion">
+        <div class="size-options-container fr jsb w100">
+
+          <label class="option-item radio-item fc">
+            <input type="radio" name="radio" checked="checked" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">5</p>
             </span>
           </label>
           
-          <label class="option-item">
-            <input type="checkbox" class="checkbox">
-            <span class="size-option-visible-portion">
+          <label class="option-item radio-item fc">
+            <input type="radio" name="radio" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">10</p>
             </span>
           </label>
 
-          <label class="option-item">
-            <input type="checkbox" class="checkbox">
-            <span class="size-option-visible-portion">
+          <label class="option-item radio-item fc">
+            <input type="radio" name="radio" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">100</p>
             </span>
           </label>
 
-          <label class="option-item">
-            <input type="checkbox" class="checkbox">
-            <span class="size-option-visible-portion">
+          <label class="option-item radio-item fc">
+            <input type="radio" name="radio" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">1000</p>
             </span>
           </label>
 
         </div>
-        <div class="size-options-container">
-          <label class="option-item">
-            <input type="checkbox" class="checkbox">
-            <span class="size-option-visible-portion">
+        <div class="size-options-container fr w100">
+
+          <label class="option-item radio-item fc">
+            <input type="radio" name="radio" class="hide-default">
+            <span class="w-h-100 border fr jc ac">
               <p class="option-text">Other</p>
             </span>
           </label>
-          <span>number</span>
+
+          <label class="option-item fc">
+            <input type="radio" name="radio" class="hide-default" disabled>
+            <div class="textfield-container fr jc ac h100">
+              <input type="number" class="w-h-100 input-style" placeholder="10,000 max" min="0" max="10000" maxlength="5">
+            </div>
+          </label>
         </div>
       </div>
 
-      <div class="new-item-container">
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
-        <span>
-          New Item Form
-        </span>
+      <div class="fc w-h-100 pt-3 " id="new-item-section">
+        <div class="new-item-box border w100 fr pb-3">
+          <fieldset class="w100 fc jsb ml-2">
+            <div class="textfield-container fr jc ac input-height mt-3">
+              <input type="text" class="input-style w-h-100" placeholder="field_name">
+            </div>
+            <div class="textfield-container fr jc ac input-height mt-3">
+              <select class="input-style w-h-100">
+                <option value="fname">First Name</option>
+                <option value="lname">Last Name</option>
+                <option value="rownum">Row Number</option>
+              </select>
+            </div>
+          </fieldset>
+          <div class="close-btn-container h100 fc js ae pr-2 pt-2">
+            <img class="close-btn" src="../src/images/close.png" alt="">
+          </div>
+        </div>
+       
         <span>
           Add New Button
         </span>
@@ -659,11 +215,11 @@
     </aside>
 
     <!-- Main component, the text area -->
-    <main class="main-section">
-      <div class="main-section-container">
+    <main class="fr jc ac w100 vh100" id="main-section">
+      <div class="fc jc ac" id="main-section-container">
 
-        <div class="text-area-container">
-          <div class="text-area">
+        <div class="fr w-h-100" id="text-area-container">
+          <div class="fc w-h-100" id="text-area">
             <span>1</span>
             <span>2</span>
             <span>3</span>
@@ -687,7 +243,7 @@
             <span>21</span>
           </div>
 
-          <aside class="text-area-sidebar">
+          <aside class="fc" id="text-area-sidebar">
             <span>
               icon
             </span>
@@ -703,7 +259,7 @@
           </aside>
         </div>
 
-        <footer class="text-area-footer">
+        <footer class="fr js ac" id="text-area-footer">
           <span>
             Button 1
           </span>
