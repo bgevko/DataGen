@@ -32,6 +32,7 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
   outline: none; }
 
 input::placeholder {
+  font-size: 16px;
   color: #a8a8a8; }
 
 input[disabled]::placeholder {

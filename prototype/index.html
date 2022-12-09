@@ -19,16 +19,16 @@
 <body>
 
   <!-- Header component -->
-  <header id="page-header">
-    <div class="w-h-100 bb"></div>
-  </header>
+  <!-- <header class="page-header">
+    <div class="header-border"></div>
+  </header> -->
 
   <!-- Content container, wraps all content -->
-  <div class="fr" id="content-container">
+  <div class="content-container">
 
     <!-- Navbar component -->
-    <nav class="fc jsb ac br" id="navbar">
-      <span class="icon-container fr jc ac">
+    <nav class="navbar">
+      <span class="icon-container">
         <a href="#" class="icon-link">
           <img src="../src/images/b.svg" alt="icon" class="icon">
         </a>
@@ -36,74 +36,59 @@
         
       </a>
       <a href="#" class="icon-link">
-        <span class="icon container fr jc ac">
+        <span class="icon container">
           <img src="../src/images/settings.svg" alt="icon" class="icon">
         </span>
       </a>
     </nav>
 
     <!-- Aside component -->
-    <aside class="fc" id="side-section">
+    <aside class="left-aside">
       <h4 class="aside-title-text">Quick Options</h4>
 
-      <div class="fc w100" id="options-container">
-        <div class="options-section fc w100">
+      <section class="options-section">
+        <div class="options-container">
 
-          <!-- Button 1 -->
-          <label class="option-item fr js as">
+          <label class="option-item">
             <input type="checkbox" name="option1" value="option1" class="hide-default">
-            <span class="border w-h-100 fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">Option1</p>
             </span>
           </label>
   
-          <label class="option-item fr js as">
+          <label class="option-item">
             <input type="checkbox" name="option2" value="option2" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">Option2</p>
             </span>
           </label>
   
-          <label class="option-item fr js as">
+          <label class="option-item">
             <input type="checkbox" name="option3" value="option3" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">Option3</p>
             </span>
           </label>
 
-          <label class="option-item fr js as">
+          <label class="option-item ">
             <input type="checkbox" name="option4" value="option4" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">Option4</p>
             </span>
           </label>
-
-          <!-- <label class="option-item fr js as">
-            <input type="checkbox" name="option5" value="option5" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
-              <p class="option-text">Option5</p>
-            </span>
-          </label>
-
-          <label class="option-item fr js as">
-            <input type="checkbox" name="option6" value="option6" class="checkbox">
-            <span class="w-h-100 border fr jc ac">
-              <p class="option-text">Option6</p>
-            </span>
-          </label> -->
         </div>
 
-        <!-- <div class="options-section w100">
-          <label class="option-item fr js as">
+        <!-- <div class="options-container">
+          <label class="option-item">
             <input type="checkbox" name="option7" value="option7" class="checkbox">
-            <span class="w-h-100 border fr jc ac">
+            <span class="w-h-100 border">
               <p class="option-text">Option7</p>
             </span>
           </label>
 
-          <label class="option-item fr js as">
+          <label class="option-item">
             <input type="checkbox" name="option8" value="option8" class="checkbox">
-            <span class="w-h-100 border fr jc ac">
+            <span class="w-h-100 border">
               <p class="option-text">Option8</p>
             </span>
           </label>
@@ -136,90 +121,93 @@
             </span>
           </label>
         </div> -->
-      </div>
+      </section>
 
-      <div class="fc w100 bb pb-3 pt-2"
+      <section class="set-size-section">
         <h4 class="aside-title-text">Set Size</h4>
-        <div class="size-options-container fr jsb w100">
+        <div class="size-options-container">
 
-          <label class="option-item radio-item fc">
+          <label class="radio-item">
             <input type="radio" name="radio" checked="checked" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">5</p>
             </span>
           </label>
           
-          <label class="option-item radio-item fc">
+          <label class="radio-item">
             <input type="radio" name="radio" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">10</p>
             </span>
           </label>
 
-          <label class="option-item radio-item fc">
+          <label class="radio-item">
             <input type="radio" name="radio" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">100</p>
             </span>
           </label>
 
-          <label class="option-item radio-item fc">
+          <label class="radio-item">
             <input type="radio" name="radio" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">1000</p>
             </span>
           </label>
 
         </div>
-        <div class="size-options-container fr w100">
+        <div class="size-options-container">
 
-          <label class="option-item radio-item fc">
+          <label class="radio-item">
             <input type="radio" name="radio" class="hide-default">
-            <span class="w-h-100 border fr jc ac">
+            <span class="quick-option-button">
               <p class="option-text">Other</p>
             </span>
           </label>
 
-          <label class="option-item fc">
+          <label class="input-item">
             <input type="radio" name="radio" class="hide-default" disabled>
-            <div class="textfield-container fr jc ac h100">
-              <input type="number" class="w-h-100 input-style" placeholder="10,000 max" min="0" max="10000" maxlength="5">
+            <div class="textfield-container">
+              <input type="number" class="input-style" placeholder="10,000 max" min="0" max="10000">
             </div>
           </label>
         </div>
-      </div>
+      </section>
 
-      <div class="fc w-h-100 pt-3 " id="new-item-section">
-        <div class="new-item-box border w100 fr pb-3">
-          <fieldset class="w100 fc jsb ml-2">
-            <div class="textfield-container fr jc ac input-height mt-3">
-              <input type="text" class="input-style w-h-100" placeholder="field_name">
+      <section class="new-item-section">
+        <h4 class="aside-title-text">Custom</h4>
+        <div class="new-item-box">
+          <fieldset class="new-item-fieldset">
+            <div class="textfield-container">
+              <input type="text" class="input-style" placeholder="field_name">
             </div>
-            <div class="textfield-container fr jc ac input-height mt-3">
-              <select class="input-style w-h-100">
+            <div class="textfield-container">
+              <select class="input-style">
                 <option value="fname">First Name</option>
                 <option value="lname">Last Name</option>
                 <option value="rownum">Row Number</option>
               </select>
             </div>
           </fieldset>
-          <div class="close-btn-container h100 fc js ae pr-2 pt-2">
+          <div class="close-btn-container">
             <img class="close-btn" src="../src/images/close.png" alt="">
           </div>
         </div>
        
-        <span>
-          Add New Button
-        </span>
-      </div>
+        <div>
+          <span class="add-field-btn">
+            Add Another Field
+          </span>
+        </div>
+      </section>
     </aside>
 
     <!-- Main component, the text area -->
-    <main class="fr jc ac w100 vh100" id="main-section">
-      <div class="fc jc ac" id="main-section-container">
+    <section class="main-section">
+      <div class="main-section-container">
 
-        <div class="fr w-h-100" id="text-area-container">
-          <div class="fc w-h-100" id="text-area">
+        <div class="text-area-container">
+          <div class="text-area">
             <span>1</span>
             <span>2</span>
             <span>3</span>
@@ -243,35 +231,58 @@
             <span>21</span>
           </div>
 
-          <aside class="fc" id="text-area-sidebar">
-            <span>
-              icon
-            </span>
-            <span>
-              icon
-            </span>
-            <span>
-              icon
-            </span>
-            <span>
-              icon
-            </span>
+          <aside class="text-area-sidebar">
+            <div class="util-icon-container">
+              <span class="util-btn">
+                <img class="util-icon" src="../src/images/copy.svg">
+              </span>
+              <span class="util-btn">
+                <img class="util-icon" src="../src/images/download.svg">
+              </span>
+              <span class="util-btn">
+                <img class="util-icon" src="../src/images/refresh.svg">
+              </span>
+              <span class="util-btn">
+                <img class="util-icon" src="../src/images/clear.svg">
+              </span>
+            </div>
           </aside>
         </div>
 
-        <footer class="fr js ac" id="text-area-footer">
-          <span>
-            Button 1
-          </span>
-          <span>
-            Button 2
-          </span>
-          <span>
-            Button 3
-          </span>
+        <footer class="text-area-footer">
+          <div class="format-btns-container">
+
+            <!-- <label class="radio-item">
+              <input type="radio" name="radio" checked="checked" class="hide-default">
+              <span class="quick-option-button">
+                <p class="option-text">5</p>
+              </span>
+            </label> -->
+
+            <label class="format-item">
+              <input type="radio" name="format-radio" checked="checked" class="hide-default">
+              <span class="format-select-btn">
+                <p class="option-text">JSON</p>
+              </span>
+            </label>
+  
+            <label class="format-item">
+              <input type="radio" name="format-radio" class="hide-default">
+              <span class="format-select-btn">
+                <p class="option-text">CSV</p>
+              </span>
+            </label>
+  
+            <label class="format-item">
+              <input type="radio" name="format-radio" class="hide-default">
+              <span class="format-select-btn">
+                <p class="option-text">Javascript</p>
+              </span>
+            </label>
+          </div>
         </footer>
       </div>
-    </main>
+    </section>
   </div>
   
 </body>
