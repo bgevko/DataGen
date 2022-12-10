@@ -34,12 +34,7 @@
       border: $border-style;
       border-radius: 6px;
     }
-    
-    body {
-      font-family: 'Open Sans';
-      font-size: 16px;
-      color: $smoke;
-    }
+
     
     .content-container {
       @extend .flex-row
