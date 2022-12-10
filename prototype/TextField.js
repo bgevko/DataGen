@@ -80,5 +80,5 @@ class TextField {
   }
 }
 
-export default TextField;
+export { TextField };
 

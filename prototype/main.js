@@ -1,5 +1,5 @@
 
-import TextField from './TextField.js';
+import { TextField } from './TextField.js';
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
