@@ -1,0 +1,25 @@
+
+/* Colors */
+:root {
+  --mist:  #f3f3f3;
+  --rain: #d1d1d1;
+  --thunder: #a8a8a8;
+  --smoke: #797979;
+  --dull: #ececec;
+}
+
+
+/* border */
+:root {
+  --border-style: 1px var(--rain) solid;
+  --border-dark: 1px var(--smoke) solid;
+  --border-radius: 6px;
+}
+
+/* distances */
+:root {
+--two: 2rem;
+--one: 1rem;
+--half: 0.5rem;
+--third: 0.3rem;
+}

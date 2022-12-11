@@ -1,10 +1,4 @@
-$mist:  #f3f3f3;
-$rain: #d1d1d1;
-$thunder: #a8a8a8;
-$smoke: #797979;
-
-$dull: #ececec;
-
+@import 'variablesCSS.css';
 
 /* Reset default styles */
 html, body, div, span, applet, object, iframe,
@@ -31,7 +25,9 @@ time, mark, audio, video {
 body {
   font-family: 'Open Sans';
   font-size: 16px;
-  color: $smoke;
+  color: var(--smoke);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Hide the default up and down arrows */
@@ -51,27 +47,22 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
 
 input::placeholder {
   font-size: 16px;
-  color: $thunder
+  color: var(--thunder)
 }
 
 input[disabled]::placeholder {
-  color: #ccc;
+  color: var(--dull);
 }
 
 input:disabled {
-  background-color: $dull !important;
+  background-color: var(--dull) !important;
 }
 
 .textfield-container:has(input:disabled) {
-  background-color: $dull;
-  border: 1px $dull solid;
+  background-color: var(--dull);
+  border: 1px var(--dull) solid;
   border-radius: 6px;
 }
-
-body {
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  }
 
 /* Remove default list styles */
 ul, ol {
@@ -86,4 +77,18 @@ table {
 
 #root, #__next {
   isolation: isolate;
+}
+
+.option-item:checked + span {
+  background-color: var(--smoke);
+  color: var(--mist);
+  border: var(--border-dark);
+}
+
+.textfield-container:focus-within {
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+}
+
+select:first-child {
+  color: var(--thunder) !important;
 }
