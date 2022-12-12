@@ -18,7 +18,7 @@ function TextAreaFooter() {
       customStyle={{
         height: "10%",
         minHeight: "30px",
-        maxHeight: "70px",
+        maxHeight: "100px",
         alignItems: "center",
         borderTop: "var(--border-style)"
       }}  
@@ -26,6 +26,7 @@ function TextAreaFooter() {
       <Container
         containerTitle="FormatButtonsContainer"
         customStyle={{
+          marginTop: "5px",
           paddingLeft: "var(--one)",
         }}
       >
@@ -34,6 +35,7 @@ function TextAreaFooter() {
           buttonTitle="JSON"
           groupName="format-options"
           customStyle={buttonStyle}
+          checked="true"
         />
         <Button 
           type="radio"
@@ -93,6 +95,7 @@ function TextAreaSidebar() {
         customStyle={{
           height: "100%",
           flexDirection: "column",
+          alignItems: "center"
         }}
       >
         <UtilButton 
@@ -115,7 +118,7 @@ function TextArea({ children }) {
         height: "fit-content",
         color: "var(--thunder)",
         overflow: "scroll",
-        marginLeft: "var(--one)"
+        marginLeft: "4rem"
       }}
     >
       {children}
@@ -129,11 +132,13 @@ function LineNumbersContainer({ children }) {
       containerTitle={"LinesNumberContainer"}
       customStyle={{
         width: "20px",
-        height: "fit-content",
+        display: "flex",
+        flexDirection: "column",
         textAlign: "right",
-        marginLeft: "var(--two)",
+        marginLeft: "var(--one)",
         color: "var(--rain)",
         overflow: "break-word",
+        position: "absolute",
       }}
     >
       {children}
@@ -148,6 +153,7 @@ function TextAreaContainer({ children }) {
       customStyle={{
         height: "100%",
         overflow: "scroll",
+        position: "relative",
       }}
     >
       {children}
@@ -163,14 +169,22 @@ function TextView({ lineNumbers, data }) {
         height: "100%",
         overflow: "hidden",
         flexDirection: "column",
+      }}
+    >
+      <Container
+      containerTitle={"TextAreaWrapper"}
+      customStyle={{
+        height: "100%",
+        flexDirection: "row",
         paddingBottom: "var(--half)",
       }}
     >
       <TextAreaContainer>
         <LineNumbersContainer>{lineNumbers}</LineNumbersContainer>
         <TextArea>{data}</TextArea>
-        <TextAreaSidebar />
       </TextAreaContainer>
+      <TextAreaSidebar />
+    </Container>
       <TextAreaFooter/>
     </Container>
   );

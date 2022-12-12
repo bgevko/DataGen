@@ -10,8 +10,34 @@ import Input from "./components/Input";
 import NewItemForm from "./components/NewItemForm";
 import Main from "./components/Main";
 import TextView from './components/TextView';
+import { useState } from 'react'; 
+import { getLines } from'./linesCache';
 
 function App() {
+  const [numLines, setNumLines] = useState("1 2 3 4 5 6 7 8 9 10 11 ")
+  const [dataLines, setDataLines] = useState("This is the data")
+  // const [selectedOption, setSelectedOption] = useState(null)
+
+  function handleChange(event) {
+    // setSelectedOption(event.target.value);
+    const lineNums = event.target.value
+    const lines = getLines(lineNums)
+    setNumLines(lines)
+  }
+
+  // Number of lines decreases
+
+  function* lineGenerator(currentLines, loadLimit, genString = "") {
+    const startingPoint = (genString[0] || 1)
+    for (let i = 1; i <= 10000; i++) {
+      genString += `${i} `;
+
+      if (i === currentLines || i % loadLimit === 0) {
+        yield genString;
+      }
+    }    
+  }
+
   return (
     <Layout>
       <Navbar></Navbar>
@@ -28,10 +54,27 @@ function App() {
             containerTitle={"QuickOptions"}
             customStyle={{ flexDirection: "column" }}
           >
-            <Button type="toggle" buttonTitle="Option 1" />
-            <Button type="toggle" buttonTitle="Option 2" />
-            <Button type="toggle" buttonTitle="Option 3" />
-            <Button type="toggle" buttonTitle="Option 4" />
+            <Button 
+              type="checkbox" 
+              buttonTitle="Option 1"
+              groupName="quick-options"
+              checked="true" 
+            />
+            <Button 
+              type="checkbox" 
+              buttonTitle="Option 2"
+              groupName="quick-options"
+            />
+            <Button 
+              type="checkbox" 
+              buttonTitle="Option 3"
+              groupName="quick-options"
+            />
+            <Button 
+              type="checkbox" 
+              buttonTitle="Option 4"
+              groupName="quick-options" 
+            />
           </Container>
         </Section>
 
@@ -52,24 +95,29 @@ function App() {
               buttonTitle="5"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
+              onChange={handleChange}
+              checked="true"
             />
             <Button
               type="radio"
               buttonTitle="10"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
+              onChange={handleChange}
             />
             <Button
               type="radio"
               buttonTitle="100"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
+              onChange={handleChange}
             />
             <Button
               type="radio"
               buttonTitle="1000"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
+              onChange={handleChange}
             />
           </Container>
 
@@ -77,7 +125,13 @@ function App() {
             containerTitle={"OtherButtonSection"}
             customStyle={{ justifyContent: "space-between" }}
           >
-            <Button type="radio" buttonTitle="Other" maxWidth="3.5rem" />
+            <Button 
+              type="radio" 
+              buttonTitle="Other" 
+              maxWidth="3.5rem"
+              groupName="size-options"
+              onChange={handleChange} 
+            />
             <Input type="number" placeHolder="10,000 max" />
           </Container>
         </Section>
@@ -111,8 +165,8 @@ function App() {
           }}
         >
           <TextView
-            lineNumbers="1 2 3 4 5 6 7 8 9 10"
-            data="This is the data"
+            lineNumbers={numLines}
+            data={dataLines}
           />
         </Section>
       </Main>

@@ -26,7 +26,13 @@ const HIDDEN_INPUT_STYLE = {
   position: "absolute",
 };
 
-function ToggleButton({ buttonTitle, customStyle = null }) {
+function CheckboxButton({
+  buttonTitle,
+  customStyle = null,
+  groupName,
+  onChange = null,
+  checked = null,
+}) {
   const buttonStyle = {
     ...BUTTON_STYLE,
     ...customStyle,
@@ -43,6 +49,10 @@ function ToggleButton({ buttonTitle, customStyle = null }) {
     <label className="ButtonLabel" style={buttonStyle}>
       <input
         type="checkbox"
+        checked={checked === "true" ? "checked" : ""}
+        onChange={onChange}
+        value={buttonTitle}
+        name={groupName}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
       />
@@ -53,7 +63,13 @@ function ToggleButton({ buttonTitle, customStyle = null }) {
   );
 }
 
-function RadioButton({ buttonTitle, customStyle = null, groupName }) {
+function RadioButton({
+  buttonTitle,
+  customStyle = null,
+  groupName,
+  onChange = null,
+  checked = null,
+}) {
   const buttonLabelStyle = {
     ...BUTTON_STYLE,
     ...customStyle,
@@ -70,9 +86,12 @@ function RadioButton({ buttonTitle, customStyle = null, groupName }) {
     <label className="ButtonLabel" style={buttonLabelStyle}>
       <input
         type="radio"
+        checked={checked === "true" ? "checked" : ""}
+        value={buttonTitle}
         name={groupName}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
+        onChange={onChange}
       />
       <span style={buttonActiveStyle} className="Button">
         <p className="ButtonText">{buttonTitle}</p>
@@ -108,18 +127,28 @@ function Button({
   buttonTitle,
   customStyle = null,
   groupName = null,
+  onChange = null,
+  checked = null,
 }) {
   switch (type) {
-    case "toggle":
+    case "checkbox":
       return (
-        <ToggleButton buttonTitle={buttonTitle} customStyle={customStyle} />
+        <CheckboxButton
+          buttonTitle={buttonTitle}
+          customStyle={customStyle}
+          groupName={groupName}
+          onChange={onChange}
+          checked={checked}
+        />
       );
     case "radio":
       return (
-        <RadioButton 
-          buttonTitle={buttonTitle} 
+        <RadioButton
+          buttonTitle={buttonTitle}
           customStyle={customStyle}
-          groupName={groupName} 
+          groupName={groupName}
+          onChange={onChange}
+          checked={checked}
         />
       );
     case "normal":
