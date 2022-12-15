@@ -9,33 +9,33 @@ import Button from "./components/Button";
 import Input from "./components/Input";
 import NewItemForm from "./components/NewItemForm";
 import Main from "./components/Main";
-import TextView from './components/TextView';
-import { useState } from 'react'; 
-import { getLines } from'./linesCache';
+import TextView from "./components/TextView";
+import { useState } from "react";
+import { getLines } from "./linesCache";
 
 function App() {
-  const [numLines, setNumLines] = useState("1 2 3 4 5 6 7 8 9 10 11 ")
-  const [dataLines, setDataLines] = useState("This is the data")
+  const [numLines, setNumLines] = useState("1 2 3 4 5 6 7 8 9 10 11 ");
+  const [dataLines, setDataLines] = useState("This is the data");
   // const [selectedOption, setSelectedOption] = useState(null)
 
   function handleChange(event) {
     // setSelectedOption(event.target.value);
-    const lineNums = event.target.value
-    const lines = getLines(lineNums)
-    setNumLines(lines)
+    const lineNums = event.target.value;
+    const lines = getLines(lineNums);
+    setNumLines(lines);
   }
 
   // Number of lines decreases
 
   function* lineGenerator(currentLines, loadLimit, genString = "") {
-    const startingPoint = (genString[0] || 1)
+    const startingPoint = genString[0] || 1;
     for (let i = 1; i <= 10000; i++) {
       genString += `${i} `;
 
       if (i === currentLines || i % loadLimit === 0) {
         yield genString;
       }
-    }    
+    }
   }
 
   return (
@@ -54,26 +54,26 @@ function App() {
             containerTitle={"QuickOptions"}
             customStyle={{ flexDirection: "column" }}
           >
-            <Button 
-              type="checkbox" 
+            <Button
+              type="checkbox"
               buttonTitle="Option 1"
               groupName="quick-options"
-              checked="true" 
+              checked="true"
             />
-            <Button 
-              type="checkbox" 
+            <Button
+              type="checkbox"
               buttonTitle="Option 2"
               groupName="quick-options"
             />
-            <Button 
-              type="checkbox" 
+            <Button
+              type="checkbox"
               buttonTitle="Option 3"
               groupName="quick-options"
             />
-            <Button 
-              type="checkbox" 
+            <Button
+              type="checkbox"
               buttonTitle="Option 4"
-              groupName="quick-options" 
+              groupName="quick-options"
             />
           </Container>
         </Section>
@@ -125,12 +125,12 @@ function App() {
             containerTitle={"OtherButtonSection"}
             customStyle={{ justifyContent: "space-between" }}
           >
-            <Button 
-              type="radio" 
-              buttonTitle="Other" 
+            <Button
+              type="radio"
+              buttonTitle="Other"
               maxWidth="3.5rem"
               groupName="size-options"
-              onChange={handleChange} 
+              onChange={handleChange}
             />
             <Input type="number" placeHolder="10,000 max" />
           </Container>
@@ -164,10 +164,7 @@ function App() {
             boxShadow: "3px 3px 21px 11px rgba(0, 0, 0, 0.13)",
           }}
         >
-          <TextView
-            lineNumbers={numLines}
-            data={dataLines}
-          />
+          <TextView lineNumbers={numLines} data={dataLines} />
         </Section>
       </Main>
     </Layout>
