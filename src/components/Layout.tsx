@@ -1,6 +1,12 @@
 import React from "react";
 
-function Layout({ children }) {
+type LayoutProps = {
+  children: React.ReactNode
+}
+
+const Layout: React.FunctionComponent<LayoutProps> = ({
+  children
+}) => {
   return (
     <div
       className="Layout"
@@ -13,5 +19,6 @@ function Layout({ children }) {
     </div>
   );
 }
+
 
 export default Layout;

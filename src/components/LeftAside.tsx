@@ -1,6 +1,12 @@
 import React from "react";
 
-function LeftAside({ children }) {
+type LeftAsideProps = {
+  children: React.ReactNode
+}
+
+const LeftAside: React.FunctionComponent<LeftAsideProps> = ({
+  children,
+}) => {
   return (
     <div
       className="LeftAside"

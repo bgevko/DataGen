@@ -1,8 +1,5 @@
-import {
-  generateLookupTable, 
-  randomIndexGenerator,
-  DataType
-} from "../Data"
+
+import { generateLookupTable, randomIndexGenerator } from '../data_logic/randomIndexGen';
 
 const LOOKUP_TABLE = generateLookupTable(37)
 

@@ -2,16 +2,15 @@ import React from "react";
 import Container from "./Container";
 import Button from "./Button";
 
-const ICON_DIRECTORY = "/icons/";
+const ICON_DIRECTORY:string = "/icons/";
 
-function TextAreaFooter() {
-  const buttonStyle = {
-    maxWidth: "6rem",
-    height: "50px",
-    marginLeft: "var(--one)",
-    borderRadius: "12px"
-  }
+type SingleChild = {
+  children: React.ReactNode
+}
 
+const TextAreaFooter: React.FunctionComponent<SingleChild> = ({
+  children
+}) => {
   return (
     <Container
       containerTitle="TextAreaFooter"
@@ -30,40 +29,30 @@ function TextAreaFooter() {
           paddingLeft: "var(--one)",
         }}
       >
-        <Button 
-          type="radio"
-          buttonTitle="JSON"
-          groupName="format-options"
-          customStyle={buttonStyle}
-          checked="true"
-        />
-        <Button 
-          type="radio"
-          buttonTitle="CSV"
-          groupName="format-options"
-          customStyle={buttonStyle}
-        />
-        <Button 
-          type="radio"
-          buttonTitle="JavaScript"
-          groupName="format-options"
-          customStyle={buttonStyle}
-        />
+        {children}
       </Container>
     </Container>
   )
 }
 
-function UtilButton({ title, customStyle = null }) {
-  const icon_path = `${ICON_DIRECTORY}${title}-icon.png`;
-  const defaultStyle = {
+type UtilButtonProps = {
+  title: string,
+  customStyle?: React.CSSProperties | null
+}
+
+const UtilButton: React.FunctionComponent<UtilButtonProps> = ({
+  title,
+  customStyle = null
+}) => {
+  const icon_path: string = `${ICON_DIRECTORY}${title}-icon.png`;
+  const defaultStyle: React.CSSProperties = {
     height: "3.5rem",
     width: "3.5rem",
     cursor: "pointer",
     marginBottom: "var(--one)",
   };
 
-  const utilButtonStyle = {
+  const utilButtonStyle: React.CSSProperties = {
     ...defaultStyle,
     ...customStyle,
   };
@@ -78,7 +67,7 @@ function UtilButton({ title, customStyle = null }) {
   );
 }
 
-function TextAreaSidebar() {
+const TextAreaSidebar: React.FunctionComponent = ()=> {
   return (
     <Container
       containerTitle={"TextAreaSidebar"}
@@ -110,15 +99,18 @@ function TextAreaSidebar() {
   );
 }
 
-function TextArea({ children }) {
+const TextArea: React.FunctionComponent<SingleChild> = ({
+  children
+}) => {
   return (
     <Container
       containerTitle={"TextArea"}
       customStyle={{
         height: "fit-content",
-        color: "var(--thunder)",
+        color: "var(--smoke)",
         overflow: "scroll",
-        marginLeft: "4rem"
+        marginLeft: "4rem",
+        whiteSpace: "pre"
       }}
     >
       {children}
@@ -126,7 +118,9 @@ function TextArea({ children }) {
   );
 }
 
-function LineNumbersContainer({ children }) {
+const LineNumbersContainer: React.FunctionComponent<SingleChild> = ({
+  children
+}) => {
   return (
     <Container
       containerTitle={"LinesNumberContainer"}
@@ -146,7 +140,9 @@ function LineNumbersContainer({ children }) {
   );
 }
 
-function TextAreaContainer({ children }) {
+const TextAreaContainer: React.FunctionComponent<SingleChild> = ({
+  children
+}) => {
   return (
     <Container
       containerTitle={"TextAreaContainer"}
@@ -161,7 +157,15 @@ function TextAreaContainer({ children }) {
   );
 }
 
-function TextView({ lineNumbers, data }) {
+type TextViewProps = {
+  lineNumbers: string,
+  data: string
+  children: React.ReactNode
+}
+
+const TextView: React.FunctionComponent<TextViewProps> = ({
+  lineNumbers, data, children
+}) => {
   return (
     <Container
       containerTitle={"TextViewWrapper"}
@@ -185,9 +189,9 @@ function TextView({ lineNumbers, data }) {
       </TextAreaContainer>
       <TextAreaSidebar />
     </Container>
-      <TextAreaFooter/>
+      {children}
     </Container>
   );
 }
 
-export default TextView;
+export { TextView, TextAreaFooter };

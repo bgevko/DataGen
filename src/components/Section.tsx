@@ -1,19 +1,29 @@
 import React from "react";
 
-function Section({ title = null, children, customStyle = null }) {
-  const defaultStyle = {
+type SectionProps = {
+  title?: string | null
+  customStyle?: React.CSSProperties | null
+  children: React.ReactNode
+}
+
+const Section: React.FunctionComponent<SectionProps> = ({
+  title = null,
+  customStyle = null,
+  children
+}) => {
+  const defaultStyle: React.CSSProperties = {
     width: "100%",
     height: "auto",
     display: "flex",
     flexDirection: "column",
   };
 
-  const sectionStyle = {
+  const sectionStyle: React.CSSProperties = {
     ...defaultStyle,
     ...customStyle,
   };
 
-  let titleElement = null;
+  let titleElement: React.ReactElement | null = null;
   if (title) {
     titleElement = (
       <h2

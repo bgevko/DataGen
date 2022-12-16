@@ -1,6 +1,12 @@
 import React from "react";
 
-function Main({ children }) {
+type MainProps = {
+  children: React.ReactNode
+}
+
+const Main: React.FunctionComponent<MainProps> = ({
+  children,
+}) => {
   return (
     <div
       className="MainSection"

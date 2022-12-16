@@ -1,13 +1,17 @@
 import React from "react";
 import Input from "./Input";
 
-const FIELD_TYPES = [
+export interface FieldTypes {
+  value: string,
+  label: string
+}
+const FIELD_TYPES: Array<FieldTypes> = [
   { value: "fname", label: "First Name" },
   { value: "lname", label: "Last Name" },
   { value: "rownum", label: "Row Number" },
 ];
 
-function NewItemForm() {
+const NewItemForm: React.FunctionComponent = () => {
   return (
     <div
       className="NewItemBox"
@@ -41,7 +45,7 @@ function NewItemForm() {
           type="option"
           placeHolder="Field Type"
           options={FIELD_TYPES}
-          customStyle={{ height: "2rem" }}
+          customStyle={{ height: "2rem",}}
         />
       </fieldset>
       <div

@@ -1,6 +1,7 @@
 import React from "react";
+import { FieldTypes } from "./NewItemForm";
 
-const TEXTFIELD_CONTAINER_STYLE = {
+const TEXTFIELD_CONTAINER_STYLE: React.CSSProperties = {
   width: "96%",
   display: "flex",
   backgroundColor: "var(--mist)",
@@ -8,17 +9,26 @@ const TEXTFIELD_CONTAINER_STYLE = {
   borderRadius: "var(--border-radius)",
 };
 
-const INPUT_STYLE = {
+const INPUT_STYLE: React.CSSProperties = {
   width: "100%",
   height: "100%",
-  marginLeft: "var(--third)",
+  marginLeft: "var(--half)",
   border: "none",
   color: "var(--smoke)",
   borderRadius: "var(--border-radius)",
   backgroundColor: "transparent",
 };
 
-function InputNumber({ placeHolder }) {
+type InputProps = {
+  type?: string,
+  placeHolder: string,
+  options?: Array<FieldTypes>
+  customStyle?: React.CSSProperties | null
+}
+
+const InputNumber: React.FunctionComponent<InputProps> = ({
+  placeHolder
+}) => {
   return (
     <label
       className="InputLabel"
@@ -42,9 +52,12 @@ function InputNumber({ placeHolder }) {
   );
 }
 
-function InputText({ placeHolder, customStyle = null }) {
+const InputText: React.FunctionComponent<InputProps> = ({
+  placeHolder,
+  customStyle = null
+}) => {
   // Combine default style with customStyle and override any clashes
-  const combinedStyle = {
+  const combinedStyle: React.CSSProperties = {
     ...TEXTFIELD_CONTAINER_STYLE,
     ...customStyle,
   };
@@ -56,29 +69,44 @@ function InputText({ placeHolder, customStyle = null }) {
   );
 }
 
-function InputOption({ placeHolder, options, customStyle = null }) {
-  const combinedStyle = {
+const InputOption: React.FunctionComponent<InputProps> = ({
+  placeHolder,
+  options,
+  customStyle = null
+}) => {
+  const combinedStyle: React.CSSProperties = {
     ...TEXTFIELD_CONTAINER_STYLE,
     ...customStyle,
   };
 
+  const selectStyle: React.CSSProperties = {
+    ...INPUT_STYLE,
+    fontSize: "1rem",
+    marginLeft: "var(--third)"
+  }
+  
   return (
     <div style={combinedStyle} className="textfield-container">
-      <select style={INPUT_STYLE} defaultValue="Field Type">
+      <select style={selectStyle} defaultValue="Field Type">
         <option disabled className="option-placeholder">
           {placeHolder}
         </option>
-        {options.map((option, index) => (
+        {(options !== undefined) ? options.map((option, index) => (
           <option value={option.value} key={index}>
             {option.label}
           </option>
-        ))}
+        )): ""}
       </select>
     </div>
   );
 }
 
-function Input({ type, placeHolder, options = null, customStyle = null }) {
+const Input: React.FunctionComponent<InputProps> = ({
+  type,
+  placeHolder,
+  options,
+  customStyle = null
+}) => {
   switch (type) {
     case "number":
       return <InputNumber placeHolder={placeHolder} />;

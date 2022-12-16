@@ -1,10 +1,17 @@
 import React from "react";
 
-const ICON_DIRECTORY = "/icons/";
+const ICON_DIRECTORY: string = "/icons/";
+type NavLinkProps = {
+  title: string,
+  path: string,
+}
 
-function NavLink({ title, path }) {
-  const icon_link = `${ICON_DIRECTORY}${title}.png`;
+const NavLink: React.FunctionComponent<NavLinkProps> = ({
+  title,
+  path,
 
+}) => {
+  const icon_link:string = `${ICON_DIRECTORY}${title}.png`;
   return (
     <span
       className="NavLinkContainer"
@@ -31,7 +38,7 @@ function NavLink({ title, path }) {
   );
 }
 
-function Navbar() {
+const Navbar: React.FunctionComponent = () => {
   return (
     <nav
       className="NavBar"

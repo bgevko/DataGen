@@ -9,25 +9,47 @@ import Button from "./components/Button";
 import Input from "./components/Input";
 import NewItemForm from "./components/NewItemForm";
 import Main from "./components/Main";
-import TextView from "./components/TextView";
-import { useState } from "react";
-import { getLines } from "./linesCache";
+import { TextView, TextAreaFooter } from "./components/TextView";
+import Data from "./data_logic/Data";
 
 function App() {
-  const [numLines, setNumLines] = useState("1 2 3 4 5 6 7 8 9 10 11 ");
-  const [dataLines, setDataLines] = useState("This is the data");
+  const [dataTypes, setDataTypes] = React.useState<Array<string>>(["FirstNames"])
+  const [itemCount, setItemCount] = React.useState<number>(5)
+  const [format, setFormat] = React.useState<string>("JSON")
+  const [dataString, setDataString] = React.useState<string>('')
+  const [numLines, setNumLines] = React.useState<string>("1 2 3 4 5 6 7 8 9 10 11 ");
+  const [dataLines, setDataLines] = React.useState<string>("This is the data");
+
+  const data = new Data()
   // const [selectedOption, setSelectedOption] = useState(null)
 
-  function handleChange(event) {
-    // setSelectedOption(event.target.value);
-    const lineNums = event.target.value;
-    const lines = getLines(lineNums);
-    setNumLines(lines);
+  React.useEffect(() => {
+    data.update({
+      itemCount: itemCount,
+      types: dataTypes
+    })
+    setDataString(data.displayJson())
+  }, []);
+  
+  function handleQuickOptionSelect(event: React.FormEvent<HTMLInputElement>) {
+    setDataTypes(prevDataTypes => prevDataTypes.concat(event.currentTarget.value));
+  }
+
+  function handleSizeSelect(event: React.FormEvent<HTMLInputElement>) {
+    setItemCount(Number(event.currentTarget.value))
+  }
+
+  function handleFormatSelect(event: React.FormEvent<HTMLInputElement>) {
+    setFormat(event.currentTarget.value)
+  }
+
+  function handleChange(event: React.FormEvent<HTMLInputElement>) {
+    console.log(event.currentTarget.value);
   }
 
   // Number of lines decreases
 
-  function* lineGenerator(currentLines, loadLimit, genString = "") {
+  function* lineGenerator(currentLines: number, loadLimit: number, genString: string = ""): IterableIterator<string> {
     const startingPoint = genString[0] || 1;
     for (let i = 1; i <= 10000; i++) {
       genString += `${i} `;
@@ -56,24 +78,27 @@ function App() {
           >
             <Button
               type="checkbox"
-              buttonTitle="Option 1"
+              buttonTitle="First Names"
               groupName="quick-options"
-              checked="true"
+              onChange={handleQuickOptionSelect}
             />
             <Button
               type="checkbox"
-              buttonTitle="Option 2"
+              buttonTitle="Last Names"
               groupName="quick-options"
+              onChange={handleQuickOptionSelect}
             />
             <Button
               type="checkbox"
-              buttonTitle="Option 3"
+              buttonTitle="Phone Numbers"
               groupName="quick-options"
+              onChange={handleQuickOptionSelect}
             />
             <Button
               type="checkbox"
-              buttonTitle="Option 4"
+              buttonTitle="Zip Codes"
               groupName="quick-options"
+              onChange={handleQuickOptionSelect}
             />
           </Container>
         </Section>
@@ -95,29 +120,28 @@ function App() {
               buttonTitle="5"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
-              onChange={handleChange}
-              checked="true"
+              onChange={handleSizeSelect}
             />
             <Button
               type="radio"
               buttonTitle="10"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
-              onChange={handleChange}
+              onChange={handleSizeSelect}
             />
             <Button
               type="radio"
               buttonTitle="100"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
-              onChange={handleChange}
+              onChange={handleSizeSelect}
             />
             <Button
               type="radio"
               buttonTitle="1000"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
-              onChange={handleChange}
+              onChange={handleSizeSelect}
             />
           </Container>
 
@@ -128,9 +152,8 @@ function App() {
             <Button
               type="radio"
               buttonTitle="Other"
-              maxWidth="3.5rem"
               groupName="size-options"
-              onChange={handleChange}
+              onChange={handleSizeSelect}
             />
             <Input type="number" placeHolder="10,000 max" />
           </Container>
@@ -148,6 +171,7 @@ function App() {
             type="normal"
             buttonTitle="Add Another Field"
             customStyle={{ marginTop: "1rem", height: "3.5rem" }}
+            onChange={handleChange}
           />
         </Section>
       </LeftAside>
@@ -164,7 +188,46 @@ function App() {
             boxShadow: "3px 3px 21px 11px rgba(0, 0, 0, 0.13)",
           }}
         >
-          <TextView lineNumbers={numLines} data={dataLines} />
+          <TextView lineNumbers={numLines} data={dataString}>
+            <TextAreaFooter>
+              <Button
+                type="radio"
+                buttonTitle="JSON"
+                groupName="format-options"
+                customStyle={{
+                  maxWidth: "6rem",
+                  height: "50px",
+                  marginLeft: "var(--one)",
+                  borderRadius: "12px",
+                }}
+                onChange={handleFormatSelect}
+              />
+              <Button
+                type="radio"
+                buttonTitle="CSV"
+                groupName="format-options"
+                customStyle={{
+                  maxWidth: "6rem",
+                  height: "50px",
+                  marginLeft: "var(--one)",
+                  borderRadius: "12px",
+                }}
+                onChange={handleFormatSelect}
+              />
+              <Button
+                type="radio"
+                buttonTitle="JavaScript"
+                groupName="format-options"
+                customStyle={{
+                  maxWidth: "6rem",
+                  height: "50px",
+                  marginLeft: "var(--one)",
+                  borderRadius: "12px",
+                }}
+                onChange={handleFormatSelect}
+              />
+            </TextAreaFooter>
+          </TextView>
         </Section>
       </Main>
     </Layout>

@@ -1,6 +1,14 @@
 import React from "react";
 
-const BUTTON_STYLE = {
+type ButtonProps = {
+  type?: string,
+  buttonTitle: string,
+  customStyle?: React.CSSProperties | null
+  groupName?: string | null,
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void)
+}
+
+const BUTTON_STYLE: React.CSSProperties = {
   width: "100%",
   height: "40px",
   display: "flex",
@@ -12,7 +20,7 @@ const BUTTON_STYLE = {
   borderRadius: "var(--border-radius)",
 };
 
-const BUTTON_ACTIVE_STYLE = {
+const BUTTON_ACTIVE_STYLE: React.CSSProperties = {
   width: "100%",
   height: "100%",
   display: "flex",
@@ -20,39 +28,35 @@ const BUTTON_ACTIVE_STYLE = {
   alignItems: "center",
 };
 
-const HIDDEN_INPUT_STYLE = {
+const HIDDEN_INPUT_STYLE: React.CSSProperties = {
   width: "0",
   height: "0",
   position: "absolute",
 };
 
-function CheckboxButton({
+const CheckboxButton: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
   customStyle = null,
   groupName,
-  onChange = null,
-  checked = null,
-}) {
-  const buttonStyle = {
+  onChange
+}) => {
+  const buttonStyle: React.CSSProperties = {
     ...BUTTON_STYLE,
-    ...customStyle,
-  };
-
+    ...customStyle
+  }
   // Check if customStyle.borderRadius exists, otherwise use BUTTON_STYLE.borderRadius as the default value
   // For active buttons only
-  const buttonActiveStyle = {
+  const buttonActiveStyle: React.CSSProperties = {
     ...BUTTON_ACTIVE_STYLE,
     borderRadius: (customStyle || {}).borderRadius || BUTTON_STYLE.borderRadius,
   };
-
-  return (
+    return (
     <label className="ButtonLabel" style={buttonStyle}>
       <input
         type="checkbox"
-        checked={checked === "true" ? "checked" : ""}
         onChange={onChange}
-        value={buttonTitle}
-        name={groupName}
+        value={buttonTitle.replace(/ /g, "")}
+        name={groupName || ""}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
       />
@@ -63,21 +67,20 @@ function CheckboxButton({
   );
 }
 
-function RadioButton({
+const RadioButton: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
   customStyle = null,
   groupName,
-  onChange = null,
-  checked = null,
-}) {
-  const buttonLabelStyle = {
+  onChange
+}) => {
+  const buttonLabelStyle: React.CSSProperties = {
     ...BUTTON_STYLE,
     ...customStyle,
   };
 
   // Check if customStyle.borderRadius exists, otherwise use BUTTON_STYLE.borderRadius as the default value
   // For active buttons only
-  const buttonActiveStyle = {
+  const buttonActiveStyle: React.CSSProperties = {
     ...BUTTON_ACTIVE_STYLE,
     borderRadius: (customStyle || {}).borderRadius || BUTTON_STYLE.borderRadius,
   };
@@ -86,9 +89,8 @@ function RadioButton({
     <label className="ButtonLabel" style={buttonLabelStyle}>
       <input
         type="radio"
-        checked={checked === "true" ? "checked" : ""}
         value={buttonTitle}
-        name={groupName}
+        name={groupName || ""}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
         onChange={onChange}
@@ -100,8 +102,11 @@ function RadioButton({
   );
 }
 
-function NormalButton({ buttonTitle, customStyle }) {
-  const buttonLabelStyle = {
+const NormalButton: React.FunctionComponent<ButtonProps> = ({
+  buttonTitle,
+  customStyle = null,
+}) => {
+  const buttonLabelStyle: React.CSSProperties = {
     ...BUTTON_STYLE,
     ...customStyle,
   };
@@ -122,14 +127,13 @@ function NormalButton({ buttonTitle, customStyle }) {
   );
 }
 
-function Button({
+const Button: React.FunctionComponent<ButtonProps> = ({
   type,
   buttonTitle,
   customStyle = null,
   groupName = null,
-  onChange = null,
-  checked = null,
-}) {
+  onChange
+}) => {
   switch (type) {
     case "checkbox":
       return (
@@ -138,7 +142,6 @@ function Button({
           customStyle={customStyle}
           groupName={groupName}
           onChange={onChange}
-          checked={checked}
         />
       );
     case "radio":
@@ -148,12 +151,15 @@ function Button({
           customStyle={customStyle}
           groupName={groupName}
           onChange={onChange}
-          checked={checked}
         />
       );
     case "normal":
       return (
-        <NormalButton buttonTitle={buttonTitle} customStyle={customStyle} />
+        <NormalButton 
+          buttonTitle={buttonTitle} 
+          customStyle={customStyle}
+          onChange={onChange} 
+        />
       );
 
     default:
