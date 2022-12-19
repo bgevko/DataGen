@@ -18,9 +18,9 @@ export class ItemStruct {
     this.length += item.length
   }
 
-  shift(): ItemInterface | null {
+  pop(): ItemInterface | null {
     if (this.length === 0) return null
-    let shiftedArrItem = this.arr.shift()
+    let shiftedArrItem = this.arr.pop()
 
     if (shiftedArrItem === undefined) return null
 

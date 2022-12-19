@@ -59,16 +59,24 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 1,
-    types: ["FirstNames"]
+    types: ["FirstNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(1)
   expect(data.itemCount).toBe(1)
   expect(data._getDataType("FirstNames").items).toHaveLength(1)
 
+  const expected = JSON.stringify([{
+    first_name: data._getDataType("FirstNames").items.arr[0]
+  }], null, 4)
+  
+  expect(data.fullDataString).toBe(expected)
+
   data.update({
     itemCount: 100,
-    types: ["LastNames"]
+    types: ["LastNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(1)
@@ -78,7 +86,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 100,
-    types: ["LastNames", "FirstNames"]
+    types: ["LastNames", "FirstNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(2)
@@ -88,7 +97,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 1,
-    types: ["FirstNames"]
+    types: ["FirstNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(1)
@@ -98,7 +108,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 1,
-    types: ["FirstNames", "LastNames"]
+    types: ["FirstNames", "LastNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(2)
@@ -108,12 +119,14 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 10,
-    types: ["LastNames"]
+    types: ["LastNames"],
+    format: "JSON"
   })
 
   data.update({
     itemCount: 100,
-    types: ["FirstNames"]
+    types: ["FirstNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(1)
@@ -123,7 +136,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 1000000,
-    types: ["FirstNames", "LastNames"]
+    types: ["FirstNames", "LastNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(2)
@@ -133,7 +147,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: -2000,
-    types: ["FirstNames", "LastNames"]
+    types: ["FirstNames", "LastNames"],
+    format: "JSON"
   })
 
   expect(data.visibleTypes).toHaveLength(2)
@@ -143,7 +158,8 @@ test("update() functions", () => {
 
   data.update({
     itemCount: 10,
-    types: []
+    types: [],
+    format: "JSON"
   })
   expect(data.visibleTypes).toHaveLength(0)
   expect(data.itemCount).toBe(10)
@@ -162,14 +178,15 @@ test("pascalToSnakeCase works", () => {
   expect(res).toMatchObject(expected)
 })
 
-test("displayJson works", () => {
-  const data = new Data()
-  data.update({
-    itemCount: 2,
-    types: ["FirstNames", "LastNames"]
-  })
+// test("Test json generator", () => {
+//   const data = new Data()
+//   data.update({
+//     itemCount: 150,
+//     types: ["FirstNames", "PhoneNumbers"],
+//     format: "JSON"
+//   })
 
-  let jsonText = data.displayJson()
-  expect(typeof jsonText).toBe('string')
-})
+//   data.loadJson.next()
+//   console.log(data.visibleDataString)
+// })
 

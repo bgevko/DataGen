@@ -39,7 +39,7 @@ test("Shift works", () => {
 
   item.push(oneItem)
   
-  let shiftedItem = item.shift()
+  let shiftedItem = item.pop()
   expect(item.length).toBe(0)
 
   const secondItem = {
@@ -49,10 +49,10 @@ test("Shift works", () => {
 
   item.push(oneItem)
   item.push(secondItem)
-  shiftedItem = item.shift()
+  shiftedItem = item.pop()
   expect(item.length).toBe(1)
 
-  shiftedItem = item.shift()
+  shiftedItem = item.pop()
   expect(item.length).toBe(0)
 
 });

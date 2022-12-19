@@ -18,12 +18,42 @@ class DataFactory {
           let dataStruct = createDataStruct(amount, faker.name.lastName)
           return dataStruct
         };
+      
+      case "Emails":
+        return (amount:number): ItemInterface => {
+          let dataStruct = createDataStruct(amount, faker.internet.email)
+          return dataStruct
+        };
 
       case "PhoneNumbers":
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.phone.number)
           return dataStruct
         };
+      
+      case "ZipCodes":
+      return (amount:number): ItemInterface => {
+        let dataStruct = createDataStruct(amount, faker.address.zipCode)
+        return dataStruct
+      };
+
+      case "StreetAddresses":
+      return (amount:number): ItemInterface => {
+        let dataStruct = createDataStruct(amount, faker.address.streetAddress)
+        return dataStruct
+      };
+
+      case "Cities":
+      return (amount:number): ItemInterface => {
+        let dataStruct = createDataStruct(amount, faker.address.city)
+        return dataStruct
+      };
+
+      case "Countries":
+      return (amount:number): ItemInterface => {
+        let dataStruct = createDataStruct(amount, faker.address.country)
+        return dataStruct
+      };
 
       default:
         throw new Error(`Invalid type: ${type}`);

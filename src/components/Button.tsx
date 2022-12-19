@@ -3,6 +3,7 @@ import React from "react";
 type ButtonProps = {
   type?: string,
   buttonTitle: string,
+  defaultChecked?: boolean,
   customStyle?: React.CSSProperties | null
   groupName?: string | null,
   onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void)
@@ -38,6 +39,7 @@ const CheckboxButton: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
   customStyle = null,
   groupName,
+  defaultChecked,
   onChange
 }) => {
   const buttonStyle: React.CSSProperties = {
@@ -59,6 +61,7 @@ const CheckboxButton: React.FunctionComponent<ButtonProps> = ({
         name={groupName || ""}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
+        defaultChecked={(defaultChecked === true)? defaultChecked : false}
       />
       <span style={buttonActiveStyle} className="Button">
         <p className="ButtonText">{buttonTitle}</p>
@@ -71,6 +74,7 @@ const RadioButton: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
   customStyle = null,
   groupName,
+  defaultChecked,
   onChange
 }) => {
   const buttonLabelStyle: React.CSSProperties = {
@@ -94,6 +98,7 @@ const RadioButton: React.FunctionComponent<ButtonProps> = ({
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
         onChange={onChange}
+        defaultChecked={(defaultChecked === true)? defaultChecked : false}
       />
       <span style={buttonActiveStyle} className="Button">
         <p className="ButtonText">{buttonTitle}</p>
@@ -130,6 +135,7 @@ const NormalButton: React.FunctionComponent<ButtonProps> = ({
 const Button: React.FunctionComponent<ButtonProps> = ({
   type,
   buttonTitle,
+  defaultChecked,
   customStyle = null,
   groupName = null,
   onChange
@@ -142,6 +148,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
           customStyle={customStyle}
           groupName={groupName}
           onChange={onChange}
+          defaultChecked={defaultChecked}
         />
       );
     case "radio":
@@ -151,6 +158,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
           customStyle={customStyle}
           groupName={groupName}
           onChange={onChange}
+          defaultChecked={defaultChecked}
         />
       );
     case "normal":

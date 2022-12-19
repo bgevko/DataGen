@@ -12,53 +12,95 @@ import Main from "./components/Main";
 import { TextView, TextAreaFooter } from "./components/TextView";
 import Data from "./data_logic/Data";
 
-function App() {
-  const [dataTypes, setDataTypes] = React.useState<Array<string>>(["FirstNames"])
-  const [itemCount, setItemCount] = React.useState<number>(5)
-  const [format, setFormat] = React.useState<string>("JSON")
-  const [dataString, setDataString] = React.useState<string>('')
-  const [numLines, setNumLines] = React.useState<string>("1 2 3 4 5 6 7 8 9 10 11 ");
-  const [dataLines, setDataLines] = React.useState<string>("This is the data");
+const data: Data = new Data();
 
-  const data = new Data()
+function App() {
+  const [dataTypes, setDataTypes] = React.useState<Array<string>>([
+    "FirstNames",
+  ]);
+  const [quickOption, setQuickOption] = React.useState<{
+    [key: string]: boolean;
+  }>({
+    FirstNames: true,
+    LastNames: false,
+    PhoneNumbers: false,
+    ZipCodes: false,
+  });
+  const [itemCount, setItemCount] = React.useState<number>(1);
+  const [loadedCount, setLoadedCount] = React.useState<number>(1)
+  const [format, setFormat] = React.useState<string>("JSON");
+  const [dataString, setDataString] = React.useState<string>("");
+  const [dataLines, setDataLines] = React.useState<string>("");
   // const [selectedOption, setSelectedOption] = useState(null)
 
   React.useEffect(() => {
-    data.update({
-      itemCount: itemCount,
-      types: dataTypes
-    })
-    setDataString(data.displayJson())
+    updateDataString();
   }, []);
-  
-  function handleQuickOptionSelect(event: React.FormEvent<HTMLInputElement>) {
-    setDataTypes(prevDataTypes => prevDataTypes.concat(event.currentTarget.value));
-  }
 
-  function handleSizeSelect(event: React.FormEvent<HTMLInputElement>) {
-    setItemCount(Number(event.currentTarget.value))
-  }
+  const updateDataString = (): void => {
+    const count = Math.min(loadedCount, itemCount)
+    data.update({
+      itemCount: count,
+      types: dataTypes,
+      format: format,
+    });
 
-  function handleFormatSelect(event: React.FormEvent<HTMLInputElement>) {
-    setFormat(event.currentTarget.value)
-  }
+    const dataItem = data.loader.get(itemCount);
+    setDataString(dataItem.dataString);
+    setDataLines(dataItem.dataLines);
+  };
 
-  function handleChange(event: React.FormEvent<HTMLInputElement>) {
-    console.log(event.currentTarget.value);
-  }
+  const handleQuickOptionSelect = (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
+    const option: string = event.currentTarget.value;
+    setQuickOption({
+      ...quickOption,
+      [option]: !quickOption[option],
+    });
+  };
 
-  // Number of lines decreases
+  React.useEffect(() => {
+    const types = Object.keys(quickOption).filter(
+      (type) => quickOption[type] === true
+    );
+    setDataTypes(types);
+  }, [quickOption]);
 
-  function* lineGenerator(currentLines: number, loadLimit: number, genString: string = ""): IterableIterator<string> {
-    const startingPoint = genString[0] || 1;
-    for (let i = 1; i <= 10000; i++) {
-      genString += `${i} `;
+  const handleSizeSelect = (event: React.FormEvent<HTMLInputElement>) => {
+    const count: number = Number(event.currentTarget.value);
+    setItemCount(count);
+    setLoadedCount(Math.min(count, 100))
+  };
 
-      if (i === currentLines || i % loadLimit === 0) {
-        yield genString;
-      }
+  React.useEffect(() => {
+    updateDataString();
+  }, [itemCount, dataTypes, format]);
+
+  const handleFormatSelect = (event: React.FormEvent<HTMLInputElement>) => {
+    const currentFormat: string = event.currentTarget.value;
+    setFormat(currentFormat);
+  };
+
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    // console.log(event.currentTarget.value);
+  };
+
+  const lazyLoadData = () => {
+    if (itemCount === loadedCount) return;
+    setLoadedCount(loadedCount + 100)
+    updateDataString()
+  };
+
+  const handleScroll = (event: React.UIEvent) => {
+    const containerHeight = event.currentTarget.clientHeight;
+    const contentHeight = event.currentTarget.scrollHeight;
+    const threshold = contentHeight - containerHeight;
+
+    if (event.currentTarget.scrollTop >= threshold - 50) {
+      lazyLoadData();
     }
-  }
+  };
 
   return (
     <Layout>
@@ -80,6 +122,7 @@ function App() {
               type="checkbox"
               buttonTitle="First Names"
               groupName="quick-options"
+              defaultChecked={true}
               onChange={handleQuickOptionSelect}
             />
             <Button
@@ -90,7 +133,31 @@ function App() {
             />
             <Button
               type="checkbox"
+              buttonTitle="Emails"
+              groupName="quick-options"
+              onChange={handleQuickOptionSelect}
+            />
+            <Button
+              type="checkbox"
               buttonTitle="Phone Numbers"
+              groupName="quick-options"
+              onChange={handleQuickOptionSelect}
+            />
+            <Button
+              type="checkbox"
+              buttonTitle="Street Addresses"
+              groupName="quick-options"
+              onChange={handleQuickOptionSelect}
+            />
+            <Button
+              type="checkbox"
+              buttonTitle="Cities"
+              groupName="quick-options"
+              onChange={handleQuickOptionSelect}
+            />
+            <Button
+              type="checkbox"
+              buttonTitle="Countries"
               groupName="quick-options"
               onChange={handleQuickOptionSelect}
             />
@@ -117,6 +184,14 @@ function App() {
           >
             <Button
               type="radio"
+              buttonTitle="1"
+              customStyle={{ maxWidth: "3.5rem" }}
+              groupName="size-options"
+              defaultChecked={true}
+              onChange={handleSizeSelect}
+            />
+            <Button
+              type="radio"
               buttonTitle="5"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
@@ -131,14 +206,7 @@ function App() {
             />
             <Button
               type="radio"
-              buttonTitle="100"
-              customStyle={{ maxWidth: "3.5rem" }}
-              groupName="size-options"
-              onChange={handleSizeSelect}
-            />
-            <Button
-              type="radio"
-              buttonTitle="1000"
+              buttonTitle="50"
               customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
               onChange={handleSizeSelect}
@@ -151,11 +219,39 @@ function App() {
           >
             <Button
               type="radio"
-              buttonTitle="Other"
+              buttonTitle="100"
+              customStyle={{ maxWidth: "3.5rem" }}
               groupName="size-options"
               onChange={handleSizeSelect}
             />
-            <Input type="number" placeHolder="10,000 max" />
+            <Button
+              type="radio"
+              buttonTitle="500"
+              customStyle={{ maxWidth: "3.5rem" }}
+              groupName="size-options"
+              onChange={handleSizeSelect}
+            />
+            <Button
+              type="radio"
+              buttonTitle="1000"
+              customStyle={{ maxWidth: "3.5rem" }}
+              groupName="size-options"
+              onChange={handleSizeSelect}
+            />
+            <Button
+              type="radio"
+              buttonTitle="5000"
+              customStyle={{ maxWidth: "3.5rem" }}
+              groupName="size-options"
+              onChange={handleSizeSelect}
+            />
+            {/* <Button
+              type="radio"
+              buttonTitle="Other"
+              groupName="size-options"
+              onChange={handleSizeSelect}
+            /> */}
+            {/* <Input type="number" placeHolder="10,000 max" /> */}
           </Container>
         </Section>
 
@@ -188,7 +284,11 @@ function App() {
             boxShadow: "3px 3px 21px 11px rgba(0, 0, 0, 0.13)",
           }}
         >
-          <TextView lineNumbers={numLines} data={dataString}>
+          <TextView
+            lineNumbers={dataLines}
+            data={dataString}
+            onScroll={handleScroll}
+          >
             <TextAreaFooter>
               <Button
                 type="radio"
@@ -201,6 +301,7 @@ function App() {
                   borderRadius: "12px",
                 }}
                 onChange={handleFormatSelect}
+                defaultChecked={true}
               />
               <Button
                 type="radio"

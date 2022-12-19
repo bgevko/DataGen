@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "./Container";
-import Button from "./Button";
+
 
 const ICON_DIRECTORY:string = "/icons/";
 
@@ -99,22 +99,27 @@ const TextAreaSidebar: React.FunctionComponent = ()=> {
   );
 }
 
-const TextArea: React.FunctionComponent<SingleChild> = ({
+type TextAreaProps = {
+  children: React.ReactNode,
+}
+
+const TextArea: React.FunctionComponent<TextAreaProps> = ({
   children
 }) => {
   return (
-    <Container
-      containerTitle={"TextArea"}
-      customStyle={{
+    <div
+      className="TextArea"
+      style={{
+        width: "100%",
         height: "fit-content",
+        display: "flex",
         color: "var(--smoke)",
-        overflow: "scroll",
         marginLeft: "4rem",
         whiteSpace: "pre"
       }}
     >
       {children}
-    </Container>
+    </div>
   );
 }
 
@@ -140,31 +145,40 @@ const LineNumbersContainer: React.FunctionComponent<SingleChild> = ({
   );
 }
 
-const TextAreaContainer: React.FunctionComponent<SingleChild> = ({
-  children
+type TextAreaContainerProps = {
+  children: React.ReactNode,
+  onScroll: React.UIEventHandler
+}
+const TextAreaContainer: React.FunctionComponent<TextAreaContainerProps> = ({
+  children, onScroll
 }) => {
   return (
-    <Container
-      containerTitle={"TextAreaContainer"}
-      customStyle={{
+    <div
+      className={"TextAreaContainer"}
+      style={{
+        width: "100%",
         height: "100%",
+        display: "flex",
+        maxHeight: "780px",
         overflow: "scroll",
         position: "relative",
       }}
+      onScroll={onScroll}
     >
       {children}
-    </Container>
+    </div>
   );
 }
 
 type TextViewProps = {
   lineNumbers: string,
   data: string
-  children: React.ReactNode
+  children: React.ReactNode,
+  onScroll: React.UIEventHandler
 }
 
 const TextView: React.FunctionComponent<TextViewProps> = ({
-  lineNumbers, data, children
+  lineNumbers, data, children, onScroll
 }) => {
   return (
     <Container
@@ -183,7 +197,7 @@ const TextView: React.FunctionComponent<TextViewProps> = ({
         paddingBottom: "var(--half)",
       }}
     >
-      <TextAreaContainer>
+      <TextAreaContainer onScroll={onScroll}>
         <LineNumbersContainer>{lineNumbers}</LineNumbersContainer>
         <TextArea>{data}</TextArea>
       </TextAreaContainer>

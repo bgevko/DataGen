@@ -54,7 +54,7 @@ export class DataType {
   
     // Add items from cachedItems
     for (let i = 0; i < amount; i++) {
-      let item: ItemInterface | null = this.cachedItems.shift()
+      let item: ItemInterface | null = this.cachedItems.pop()
       if (item !== null) {
         this.items.push(item)
       }
@@ -64,7 +64,7 @@ export class DataType {
   remove(amount: number): void {
     // Put items back into cachedItems
     for (let i = 0; i < amount; i++) {
-      let item = this.items.shift()
+      let item = this.items.pop()
       if (item !== null) {
         this.cachedItems.push(item)
       }
@@ -75,7 +75,7 @@ export class DataType {
     // Put all items back into cachedItems
     const length = this.items.length
     for (let i = 0; i < length; i++) {
-      let item = this.items.shift()
+      let item = this.items.pop()
       if (item !== null) {
         this.cachedItems.push(item)
       }
