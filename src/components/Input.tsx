@@ -90,20 +90,23 @@ const InputOption: React.FunctionComponent<InputProps> = ({
   
   return (
     <div style={combinedStyle} className="textfield-container">
-      <Select 
+      {/* <Select 
         options={options}
         onChange={onChangeSelect} 
-      />
-      {/* <select style={selectStyle} defaultValue="Field Type">
+      /> */}
+      <select style={selectStyle} defaultValue="Field Type">
         <option disabled className="option-placeholder">
           {placeHolder}
         </option>
         {(options !== undefined) ? options.map((option, index) => (
-          <option value={option.value} key={index}>
+          <option 
+            value={option.value} 
+            key={index} 
+            onChange={onChangeSelect}>
             {option.label}
           </option>
         )): ""}
-      </select> */}
+      </select>
     </div>
   );
 }
