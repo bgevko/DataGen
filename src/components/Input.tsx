@@ -1,5 +1,6 @@
 import React from "react";
 import { FieldTypes } from "./NewItemForm";
+import Select from "react-select"
 
 const TEXTFIELD_CONTAINER_STYLE: React.CSSProperties = {
   width: "96%",
@@ -24,6 +25,7 @@ type InputProps = {
   placeHolder: string,
   options?: Array<FieldTypes>
   customStyle?: React.CSSProperties | null
+  onChangeSelect?: any
 }
 
 const InputNumber: React.FunctionComponent<InputProps> = ({
@@ -72,7 +74,8 @@ const InputText: React.FunctionComponent<InputProps> = ({
 const InputOption: React.FunctionComponent<InputProps> = ({
   placeHolder,
   options,
-  customStyle = null
+  customStyle = null,
+  onChangeSelect,
 }) => {
   const combinedStyle: React.CSSProperties = {
     ...TEXTFIELD_CONTAINER_STYLE,
@@ -87,7 +90,11 @@ const InputOption: React.FunctionComponent<InputProps> = ({
   
   return (
     <div style={combinedStyle} className="textfield-container">
-      <select style={selectStyle} defaultValue="Field Type">
+      <Select 
+        options={options}
+        onChange={onChangeSelect} 
+      />
+      {/* <select style={selectStyle} defaultValue="Field Type">
         <option disabled className="option-placeholder">
           {placeHolder}
         </option>
@@ -96,7 +103,7 @@ const InputOption: React.FunctionComponent<InputProps> = ({
             {option.label}
           </option>
         )): ""}
-      </select>
+      </select> */}
     </div>
   );
 }
@@ -105,7 +112,8 @@ const Input: React.FunctionComponent<InputProps> = ({
   type,
   placeHolder,
   options,
-  customStyle = null
+  customStyle = null,
+  onChangeSelect = null
 }) => {
   switch (type) {
     case "number":
@@ -118,6 +126,7 @@ const Input: React.FunctionComponent<InputProps> = ({
           placeHolder={placeHolder}
           options={options}
           customStyle={customStyle}
+          onChangeSelect={onChangeSelect}
         />
       );
     default:

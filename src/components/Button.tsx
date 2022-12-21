@@ -4,9 +4,11 @@ type ButtonProps = {
   type?: string,
   buttonTitle: string,
   defaultChecked?: boolean,
+  checked?: boolean,
   customStyle?: React.CSSProperties | null
   groupName?: string | null,
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void)
+  onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void),
+  onClick?: any
 }
 
 const BUTTON_STYLE: React.CSSProperties = {
@@ -40,6 +42,7 @@ const CheckboxButton: React.FunctionComponent<ButtonProps> = ({
   customStyle = null,
   groupName,
   defaultChecked,
+  checked,
   onChange
 }) => {
   const buttonStyle: React.CSSProperties = {
@@ -61,7 +64,8 @@ const CheckboxButton: React.FunctionComponent<ButtonProps> = ({
         name={groupName || ""}
         className="HiddenInput option-item"
         style={HIDDEN_INPUT_STYLE}
-        defaultChecked={(defaultChecked === true)? defaultChecked : false}
+        // defaultChecked={(defaultChecked === true)? defaultChecked : false}
+        checked={checked}
       />
       <span style={buttonActiveStyle} className="Button">
         <p className="ButtonText">{buttonTitle}</p>
@@ -110,6 +114,7 @@ const RadioButton: React.FunctionComponent<ButtonProps> = ({
 const NormalButton: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
   customStyle = null,
+  onClick
 }) => {
   const buttonLabelStyle: React.CSSProperties = {
     ...BUTTON_STYLE,
@@ -125,7 +130,11 @@ const NormalButton: React.FunctionComponent<ButtonProps> = ({
 
   return (
     <label className="ButtonLabel" style={buttonLabelStyle}>
-      <span style={buttonActiveStyle} className="Button">
+      <span 
+        style={buttonActiveStyle} 
+        className="Button"
+        onClick={onClick}
+      >
         <p className="ButtonText">{buttonTitle}</p>
       </span>
     </label>
@@ -136,9 +145,11 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   type,
   buttonTitle,
   defaultChecked,
+  checked = null,
   customStyle = null,
   groupName = null,
-  onChange
+  onChange,
+  onClick = null
 }) => {
   switch (type) {
     case "checkbox":
@@ -149,6 +160,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
           groupName={groupName}
           onChange={onChange}
           defaultChecked={defaultChecked}
+          checked={checked!}
         />
       );
     case "radio":
@@ -166,7 +178,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         <NormalButton 
           buttonTitle={buttonTitle} 
           customStyle={customStyle}
-          onChange={onChange} 
+          onClick={onClick} 
         />
       );
 

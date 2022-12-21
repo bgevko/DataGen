@@ -55,18 +55,24 @@ class DataFactory {
         return dataStruct
       };
 
+      case "AlphaNumerics":
+        return (amount:number): ItemInterface => {
+          let dataStruct = createDataStruct(amount, faker.random.alphaNumeric, [10])
+          return dataStruct
+        };
       default:
         throw new Error(`Invalid type: ${type}`);
     }
 
     // Helper function used to create data in every case above
-    function createDataStruct(length: number, generateItem: Function): ItemInterface {
+    function createDataStruct(length: number, generateItem: Function, args?: Array<any>): ItemInterface {
+      const arg = (args === undefined) ? null : args[0]
       const dataStruct: ItemInterface = {
         "arr": [],
         length: 0
       }
       for (let i = 0; i < length; i++) {
-        let dataItem = generateItem()
+        let dataItem = generateItem(arg)
         dataStruct["arr"].push(dataItem)
         dataStruct.length += 1
       }

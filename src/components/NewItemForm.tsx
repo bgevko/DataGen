@@ -3,15 +3,29 @@ import Input from "./Input";
 
 export interface FieldTypes {
   value: string,
-  label: string
+  label: string,
+  id?: string
 }
 const FIELD_TYPES: Array<FieldTypes> = [
-  { value: "fname", label: "First Name" },
-  { value: "lname", label: "Last Name" },
-  { value: "rownum", label: "Row Number" },
+  { value: "AlphaNumerics", label: "Alpha Numeric" },
 ];
 
-const NewItemForm: React.FunctionComponent = () => {
+type NewItemFormProps = {
+  onDelete: any,
+  id: string
+  onChangeSelect: any
+}
+
+const NewItemForm: React.FunctionComponent<NewItemFormProps> = ({
+  id, 
+  onDelete,
+  onChangeSelect
+}) => {
+  
+  function handleFormDelete() {
+    onDelete(id)
+  }
+
   return (
     <div
       className="NewItemBox"
@@ -21,6 +35,7 @@ const NewItemForm: React.FunctionComponent = () => {
         display: "flex",
         paddingBottom: "1rem",
         paddingTop: "1rem",
+        marginBottom: "1rem",
         border: "var(--border-style)",
         borderRadius: "var(--border-radius)",
       }}
@@ -35,27 +50,30 @@ const NewItemForm: React.FunctionComponent = () => {
           marginLeft: "var(--one)",
         }}
       >
-        <Input
+        {/* <Input
           type="text"
           placeHolder="field_name"
           customStyle={{ height: "2rem", marginBottom: "1rem" }}
-        />
+        /> */}
 
         <Input
           type="option"
           placeHolder="Field Type"
           options={FIELD_TYPES}
           customStyle={{ height: "2rem",}}
+          onChangeSelect={onChangeSelect}
         />
       </fieldset>
       <div
         className="CloseButtonContainer"
+        id={id}
         style={{
           width: "10%",
           height: "100%",
           paddingRight: ".5rem",
           position: "relative",
         }}
+        onClick={handleFormDelete}
       >
         <img
           className="CloseButtonIcon"

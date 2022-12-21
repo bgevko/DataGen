@@ -38,18 +38,27 @@ const TextAreaFooter: React.FunctionComponent<SingleChild> = ({
 type UtilButtonProps = {
   title: string,
   customStyle?: React.CSSProperties | null
+  onClick?: any
+  clickedLabel?: string
 }
 
 const UtilButton: React.FunctionComponent<UtilButtonProps> = ({
   title,
-  customStyle = null
+  customStyle = null,
+  onClick = null,
+  clickedLabel = null
 }) => {
   const icon_path: string = `${ICON_DIRECTORY}${title}-icon.png`;
   const defaultStyle: React.CSSProperties = {
-    height: "3.5rem",
-    width: "3.5rem",
+    height: "4rem",
+    width: "4rem",
     cursor: "pointer",
     marginBottom: "var(--one)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "12px",
+    border: "none"
   };
 
   const utilButtonStyle: React.CSSProperties = {
@@ -58,16 +67,33 @@ const UtilButton: React.FunctionComponent<UtilButtonProps> = ({
   };
 
   return (
-    <img
+    <button
       className="UtilButton"
       style={utilButtonStyle}
-      src={icon_path}
-      alt={`${title} icon`}
-    />
+      onClick={onClick}
+    >
+    {
+      clickedLabel 
+      ? 
+      <div>{clickedLabel}</div>
+      :
+      <img 
+        src={icon_path} alt={`${title} icon`}
+        style={{
+          width: "100%",
+          height: "100%"
+        }} 
+      />
+    }
+    </button>
   );
 }
 
-const TextAreaSidebar: React.FunctionComponent = ()=> {
+type SideBarProps = {
+  children: React.ReactNode
+}
+
+const TextAreaSidebar: React.FunctionComponent<SideBarProps> =({children})=> {
   return (
     <Container
       containerTitle={"TextAreaSidebar"}
@@ -87,13 +113,7 @@ const TextAreaSidebar: React.FunctionComponent = ()=> {
           alignItems: "center"
         }}
       >
-        <UtilButton 
-          title="copy" 
-          customStyle={{ marginBottom: "auto" }} 
-        />
-        <UtilButton title="download" />
-        <UtilButton title="refresh" />
-        <UtilButton title="clear" />
+       {children}
       </Container>
     </Container>
   );
@@ -159,7 +179,8 @@ const TextAreaContainer: React.FunctionComponent<TextAreaContainerProps> = ({
         width: "100%",
         height: "100%",
         display: "flex",
-        maxHeight: "780px",
+        maxHeight: "730px",
+        maxWidth: "700px",
         overflow: "scroll",
         position: "relative",
       }}
@@ -175,37 +196,15 @@ type TextViewProps = {
   data: string
   children: React.ReactNode,
   onScroll: React.UIEventHandler
+  onClick?: any
 }
 
-const TextView: React.FunctionComponent<TextViewProps> = ({
-  lineNumbers, data, children, onScroll
-}) => {
-  return (
-    <Container
-      containerTitle={"TextViewWrapper"}
-      customStyle={{
-        height: "100%",
-        overflow: "hidden",
-        flexDirection: "column",
-      }}
-    >
-      <Container
-      containerTitle={"TextAreaWrapper"}
-      customStyle={{
-        height: "100%",
-        flexDirection: "row",
-        paddingBottom: "var(--half)",
-      }}
-    >
-      <TextAreaContainer onScroll={onScroll}>
-        <LineNumbersContainer>{lineNumbers}</LineNumbersContainer>
-        <TextArea>{data}</TextArea>
-      </TextAreaContainer>
-      <TextAreaSidebar />
-    </Container>
-      {children}
-    </Container>
-  );
-}
+export {
+  TextAreaContainer,
+  LineNumbersContainer,
+  TextArea,
+  TextAreaSidebar,
+  UtilButton, 
+  TextAreaFooter 
+};
 
-export { TextView, TextAreaFooter };

@@ -4,7 +4,7 @@ import { LOOKUP_TABLE, randomIndexGenerator } from './randomIndexGen';
 
 export const CACHE_SIZE = 100
 export const CACHE_THRESHOLD = 0
-export const MAX_ITEM_LIMIT = 10000
+export const MAX_ITEM_LIMIT = 5000
 
 export class DataType {
   type: string;
