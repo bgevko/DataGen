@@ -1,34 +1,31 @@
 import React from "react";
-import Input from "./Input";
+import InputOption from "../inputs/InputOption";
+import { FormItem } from "../../custom_hooks/useCustomItemForm";
 
-export interface FieldTypes {
+type CustomFormProps = {
+  onDelete: (formId: string) => void,
+  onChangeSelect: (id: string, value: string) => void
+  options: Array<SelectOptions>
+  disabledOptions: Array<string>
+  form: FormItem
+}
+
+export type SelectOptions = {
   value: string,
   label: string,
-  id?: string
-}
-const FIELD_TYPES: Array<FieldTypes> = [
-  { value: "AlphaNumerics", label: "Alpha Numeric" },
-];
-
-type NewItemFormProps = {
-  onDelete: any,
-  id: string
-  onChangeSelect: any
 }
 
-const NewItemForm: React.FunctionComponent<NewItemFormProps> = ({
-  id, 
+const NewItemForm: React.FunctionComponent<CustomFormProps> = ({
   onDelete,
-  onChangeSelect
+  onChangeSelect,
+  options,
+  disabledOptions,
+  form
 }) => {
-  
-  function handleFormDelete() {
-    onDelete(id)
-  }
 
   return (
     <div
-      className="NewItemBox"
+      className={`NewItemBox`}
       style={{
         width: "100%",
         height: "auto",
@@ -56,24 +53,24 @@ const NewItemForm: React.FunctionComponent<NewItemFormProps> = ({
           customStyle={{ height: "2rem", marginBottom: "1rem" }}
         /> */}
 
-        <Input
-          type="option"
+        <InputOption
           placeHolder="Field Type"
-          options={FIELD_TYPES}
+          options={options}
+          disabledOptions={disabledOptions}
+          formId={form.id}
           customStyle={{ height: "2rem",}}
-          onChangeSelect={onChangeSelect}
+          onSelect={onChangeSelect}
         />
       </fieldset>
       <div
         className="CloseButtonContainer"
-        id={id}
         style={{
           width: "10%",
           height: "100%",
           paddingRight: ".5rem",
           position: "relative",
         }}
-        onClick={handleFormDelete}
+        onClick={() => onDelete(form.id)}
       >
         <img
           className="CloseButtonIcon"

@@ -1,10 +1,10 @@
 import React from "react";
 
-type LeftAsideProps = {
+type AsideProps = {
   children: React.ReactNode
 }
 
-const LeftAside: React.FunctionComponent<LeftAsideProps> = ({
+const Aside: React.FunctionComponent<AsideProps> = ({
   children,
 }) => {
   return (
@@ -26,4 +26,4 @@ const LeftAside: React.FunctionComponent<LeftAsideProps> = ({
   );
 }
 
-export default LeftAside;
+export default Aside;

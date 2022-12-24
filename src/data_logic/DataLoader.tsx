@@ -28,6 +28,8 @@ class DataLoader{
     const dataString = this.formatString(combined)
     const lineCount = this.calculateLineCountFor(Math.min(amount, this.data.itemCount))
     const lines = makeLines(lineCount)
+    this.visibleDataString = dataString
+    this.dataLines = lines
     return {dataString: dataString, dataLines: lines}
   }
 

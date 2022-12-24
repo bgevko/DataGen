@@ -38,26 +38,4 @@ const NavLink: React.FunctionComponent<NavLinkProps> = ({
   );
 }
 
-const Navbar: React.FunctionComponent = () => {
-  return (
-    <nav
-      className="NavBar"
-      style={{
-        width: "10%",
-        height: "100vh",
-        minWidth: "80px",
-        maxWidth: "90px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderRight: "var(--border-style)",
-      }}
-    >
-      <NavLink title="b-icon" path="#" />
-      <NavLink title="settings-icon" path="#" />
-    </nav>
-  );
-}
-
-export default Navbar;
+export default NavLink

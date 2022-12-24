@@ -20,7 +20,9 @@ class Data {
     Cities: new DataType("Cities"),
     Countries: new DataType("Countries"),
     ZipCodes: new DataType("ZipCodes"),
-    AlphaNumerics: new DataType("AlphaNumerics")
+    AlphaNumerics: new DataType("AlphaNumerics"),
+    Animals: new DataType("Animals"),
+    Colors: new DataType("Colors")
   };
 
   constructor() {

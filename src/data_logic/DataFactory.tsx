@@ -59,7 +59,20 @@ class DataFactory {
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.random.alphaNumeric, [10])
           return dataStruct
-        };
+      };
+
+      case "Animals":
+        return (amount:number): ItemInterface => {
+          let dataStruct = createDataStruct(amount, faker.animal.type)
+          return dataStruct
+      };
+
+      case "Colors":
+        return (amount:number): ItemInterface => {
+          let dataStruct = createDataStruct(amount, faker.color.human)
+          return dataStruct
+      };
+      
       default:
         throw new Error(`Invalid type: ${type}`);
     }
