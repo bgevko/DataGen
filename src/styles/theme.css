@@ -40,3 +40,10 @@ select.dark-mode:first-child {
   color: var(--tanned) !important;
   background-color: var(--brown) !important;
 }
+
+button.dark-mode:disabled {
+  color: var(--tanned) !important;
+  border-color: var(--tanned) !important;
+  opacity: .5 !important;
+  cursor:not-allowed !important;
+}
