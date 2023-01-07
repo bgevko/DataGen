@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext }from "react";
+import { DarkModeContext } from "../../App";
 import Container from "../containers/Container";
 
 type TextFooterProps = {
@@ -8,6 +9,9 @@ type TextFooterProps = {
 const TextFooter: React.FunctionComponent<TextFooterProps> = ({
   children
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+  
   return (
     <Container
     containerTitle="TextAreaFooter"
@@ -16,7 +20,7 @@ const TextFooter: React.FunctionComponent<TextFooterProps> = ({
       minHeight: "30px",
       maxHeight: "100px",
       alignItems: "center",
-      borderTop: "var(--border-style)"
+      borderTop: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
     }}  
   >
     <Container

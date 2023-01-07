@@ -1,80 +1,86 @@
 import { faker } from '@faker-js/faker'
 import { ItemInterface } from './ItemStruct';
-
+import { Type } from './Data';
 
 class DataFactory {
   static createGenerateDataFunction(type: string): ((amount: number) =>  ItemInterface) {
     switch (type) {
 
-      case "FirstNames":   
+      case Type.FirstNames:   
         return (amount: number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.name.firstName)
           return dataStruct
         }
        
 
-      case "LastNames":
+      case Type.LastNames:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.name.lastName)
           return dataStruct
         };
       
-      case "Emails":
+      case Type.Emails:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.internet.email)
           return dataStruct
         };
 
-      case "PhoneNumbers":
+      case Type.PhoneNumbers:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.phone.number)
           return dataStruct
         };
       
-      case "ZipCodes":
+      case Type.ZipCodes:
       return (amount:number): ItemInterface => {
         let dataStruct = createDataStruct(amount, faker.address.zipCode)
         return dataStruct
       };
 
-      case "StreetAddresses":
+      case Type.StreetAddresses:
       return (amount:number): ItemInterface => {
         let dataStruct = createDataStruct(amount, faker.address.streetAddress)
         return dataStruct
       };
 
-      case "Cities":
+      case Type.Cities:
       return (amount:number): ItemInterface => {
         let dataStruct = createDataStruct(amount, faker.address.city)
         return dataStruct
       };
 
-      case "Countries":
+      case Type.Countries:
       return (amount:number): ItemInterface => {
         let dataStruct = createDataStruct(amount, faker.address.country)
         return dataStruct
       };
 
-      case "AlphaNumerics":
+      case Type.AlphaNumerics:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.random.alphaNumeric, [10])
           return dataStruct
       };
 
-      case "Animals":
+      case Type.Animals:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.animal.type)
           return dataStruct
       };
 
-      case "Colors":
+      case Type.Colors:
         return (amount:number): ItemInterface => {
           let dataStruct = createDataStruct(amount, faker.color.human)
           return dataStruct
       };
+
+      case Type.Integers:
+        return (amount:number): ItemInterface => {
+          let dataStruct = createDataStruct(amount, faker.datatype.number, [99999])
+          return dataStruct
+      };
       
       default:
-        throw new Error(`Invalid type: ${type}`);
+        throw new Error(`Invalid at Data Factory class: ${type}`);
     }
 
     // Helper function used to create data in every case above

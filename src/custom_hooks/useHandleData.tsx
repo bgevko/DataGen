@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Data from "../data_logic/Data"
+import { Format } from "../data_logic/Data"
 
 type HandleDataHook = [
   copiedState: boolean,
@@ -31,20 +32,33 @@ function useHandleData(
     if (data.visibleTypes.length === 0) return
     const dataToDownload = data.loader.getFullString()
     let blob: Blob | MediaSource
+    let fileSuffix: string = 'txt'
 
     switch (data.format) {
-      case "JSON":
+      case Format.JSON:
         blob = new Blob([dataToDownload], { type: 'application/json' });
+        fileSuffix = 'json'
         break;
     
-      case "CSV":
+      case Format.CSV:
         blob = new Blob([dataToDownload], { type: 'text/csv' });
+        fileSuffix = 'csv'
+        break
+
+      case Format.Array:
+        blob = new Blob([dataToDownload], { type: 'text/plain' });
+        fileSuffix = 'txt'
+        break
+
+      case Format.Object:
+        blob = new Blob([dataToDownload], { type: 'text/plain' });
+        fileSuffix = 'txt'
         break
     }
 
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob!)
-    a.download = `data.${data.format.toLowerCase()}`
+    a.download = `data.${fileSuffix}`
     document.body.appendChild(a)
     a.click()
   }

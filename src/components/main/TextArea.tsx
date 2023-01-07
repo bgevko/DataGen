@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { DarkModeContext } from "../../App";
 import Container from "../containers/Container";
 
 type TextAreaProps = {
   children: React.ReactNode;
 };
 const TextArea: React.FunctionComponent<TextAreaProps> = ({ children }) => {
+  
   return (
     <Container
       containerTitle={"TextAreaWrapper"}
@@ -32,6 +34,8 @@ const Text: React.FunctionComponent<TextProps> = ({
   onScroll,
   setCopiedState
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
 
   useEffect(() => {
     setCopiedState(false)
@@ -39,14 +43,14 @@ const Text: React.FunctionComponent<TextProps> = ({
 
   return (
     <div
-      className={"TextAreaContainer"}
+      className={`TextAreaContainer ${themeClassName}`}
       style={{
         width: "100%",
         height: "100%",
         display: "flex",
         maxHeight: "730px",
         maxWidth: "700px",
-        overflow: "scroll",
+        overflow: "auto",
         position: "relative",
       }}
       onScroll={event => onScroll(event)}
@@ -59,7 +63,7 @@ const Text: React.FunctionComponent<TextProps> = ({
           flexDirection: "column",
           textAlign: "right",
           marginLeft: "var(--one)",
-          color: "var(--rain)",
+          color: (darkMode) ? "var(--tanned)" : "var(--rain)",
           overflow: "break-word",
           position: "absolute",
         }}
@@ -72,7 +76,7 @@ const Text: React.FunctionComponent<TextProps> = ({
           width: "100%",
           height: "fit-content",
           display: "flex",
-          color: "var(--smoke)",
+          color: (darkMode) ? "var(--sunset)" : "var(--smoke)",
           marginLeft: "4rem",
           whiteSpace: "pre",
         }}

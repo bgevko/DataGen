@@ -27,6 +27,7 @@ export function useCustomItemForm(): ItemFormHook {
     { value: "AlphaNumerics", label: "Alpha Numeric" },
     { value: "Animals", label: "Animal" },
     { value: "Colors", label: "Color" },
+    { value: "Integers", label: "Integer" },
   ]);
   const [customOptions, setCustomOptions] = useState<Array<string>>([])
 

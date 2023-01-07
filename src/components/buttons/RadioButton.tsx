@@ -1,71 +1,99 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CSSProperties } from "react";
-
+import { DarkModeContext } from "../../App";
+import ButtonSettingsIcon from "./ButtonSettingsIcon";
 
 type RadioButtonProps = {
-  buttonTitle: string,
-  customStyle?: CSSProperties,
-  groupName: string,
-  onChange: (option: string) => void,
-  checked: boolean
-}
+  buttonTitle: string;
+  customStyle?: CSSProperties;
+  groupName: string;
+  onChange: (option: string) => void;
+  checked: boolean;
+  borderRadius?: string,
+  height?: string,
+  hasSettings?: boolean
+};
 
 const RadioButton: React.FunctionComponent<RadioButtonProps> = ({
   buttonTitle,
   customStyle,
   groupName,
   onChange,
-  checked
+  checked,
+  borderRadius,
+  height,
+  hasSettings
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+  
   const buttonLabelStyle: React.CSSProperties = {
-    width: "100%",
-    height: "40px",
+    width: "85%",
+    height: height || "40px",
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
     marginBottom: "var(--half)",
     cursor: "pointer",
-    border: "var(--border-style)",
-    borderRadius: "var(--border-radius)",
-    ...customStyle,
+    border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
+    color: (darkMode) ? "var(--tanned)" : "var(--smoke)",
+    borderRadius: borderRadius || "var(--border-radius)",
   };
 
   function handleSelect() {
-    onChange!(buttonTitle)
+    onChange!(buttonTitle);
   }
 
-  // For active buttons 
+  // For active buttons
   const buttonActiveStyle: CSSProperties = {
     width: "100%",
     height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: (customStyle || {}).borderRadius || buttonLabelStyle.borderRadius,
+    borderRadius: buttonLabelStyle.borderRadius
   };
 
   const hiddenInput: CSSProperties = {
     width: "0",
     height: "0",
     position: "absolute",
-  }
+  };
+
+  const settingsIcon = (hasSettings) ?
+    <div
+      style={{
+        position: "relative",
+        display: (checked) ? "block" : "none"
+      }}
+    >
+      <ButtonSettingsIcon/> 
+    </div>
+  : null
 
   return (
-    <label className="ButtonLabel" style={buttonLabelStyle}>
-      <input
-        type="radio"
-        value={buttonTitle}
-        name={groupName || ""}
-        className="HiddenInput option-item"
-        style={hiddenInput}
-        onChange={handleSelect}
-        checked={checked}
-      />
-      <span style={buttonActiveStyle} className="Button">
-        <p className="ButtonText">{buttonTitle}</p>
-      </span>
-    </label>
+    <>
+    {settingsIcon}
+    <div
+      style={customStyle}
+    >
+      <label className="ButtonLabel" style={buttonLabelStyle}>
+        <input
+          type="radio"
+          value={buttonTitle}
+          name={groupName || ""}
+          className={`HiddenInput option-item ${themeClassName}`}
+          style={hiddenInput}
+          onChange={handleSelect}
+          checked={checked}
+        />
+        <span style={buttonActiveStyle} className="Button">
+          <p className="ButtonText">{buttonTitle}</p>
+        </span>
+      </label>
+    </div>
+    </>
   );
-}
+};
 
-export default RadioButton
+export default RadioButton;

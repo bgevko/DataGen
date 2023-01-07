@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useContext } from "react"
+import { DarkModeContext } from "../../App"
 
 type CheckboxButtonProps = {
   buttonTitle: string
@@ -15,6 +16,9 @@ const CheckboxButton: React.FunctionComponent<CheckboxButtonProps> = ({
   checked,
   onToggle
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+
   const buttonStyle: React.CSSProperties = {
     width: "100%",
     height: "40px",
@@ -23,7 +27,8 @@ const CheckboxButton: React.FunctionComponent<CheckboxButtonProps> = ({
     alignItems: "center",
     marginBottom: "var(--half)",
     cursor: "pointer",
-    border: "var(--border-style)",
+    border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
+    color: (darkMode) ? "var(--tanned)" : "var(--smoke)",
     borderRadius: "var(--border-radius)",
     ...customStyle
   }
@@ -49,17 +54,17 @@ const CheckboxButton: React.FunctionComponent<CheckboxButtonProps> = ({
     onToggle!(btnValue)
   }
     return (
-    <label className="ButtonLabel" style={buttonStyle}>
+    <label className={`ButtonLabel ${themeClassName}`} style={buttonStyle}>
       <input
         type="checkbox"
         onChange={handleChange}
         value={btnValue}
         name={groupName}
-        className="HiddenInput option-item"
+        className={`HiddenInput option-item ${themeClassName}`}
         style={hiddenInput}
         checked={checked}
       />
-      <span style={buttonActiveStyle} className="Button">
+      <span style={buttonActiveStyle} className={`Button ${themeClassName}`}>
         <p className="ButtonText">{buttonTitle}</p>
       </span>
     </label>

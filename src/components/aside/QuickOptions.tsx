@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Section from "../containers/Section";
 import Container from "../containers/Container";
+import { DarkModeContext } from "../../App";
 
 type QuickOptionsProps = {
   children: React.ReactNode;
@@ -9,13 +10,16 @@ type QuickOptionsProps = {
 const QuickOptions: React.FunctionComponent<QuickOptionsProps> = ({
   children,
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+  
   return (
     <Section
       title="Quick Options"
       customStyle={{
         paddingTop: "var(--half)",
         paddingBottom: "var(--one",
-        borderBottom: "var(--border-style)",
+        borderBottom: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
       }}
     >
       <Container

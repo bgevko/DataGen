@@ -13,6 +13,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
       style={{
         display: "flex",
         flexDirection: "row",
+        paddingTop: "1rem",
       }}
     >
       {children}

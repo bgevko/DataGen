@@ -1,0 +1,42 @@
+@import 'variablesCSS.css';
+
+body.dark-mode {
+  color: var(--tanned);
+}
+
+html.dark-mode {
+  background-color: var(--dark-chocolate);
+}
+
+h2.dark-mode, h1.dark-mode {
+  color: var(--sunset);
+}
+
+p.dark-mode, ul.dark-mode {
+  color: var(--tanned);
+}
+
+input.dark-mode::placeholder {
+  color: #946454;
+}
+
+.dark-mode::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: transparent;
+}
+
+.dark-mode::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: transparent
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--sunset)
+}
+
+select.dark-mode:first-child {
+  color: var(--tanned) !important;
+  background-color: var(--brown) !important;
+}

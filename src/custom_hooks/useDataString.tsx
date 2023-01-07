@@ -15,7 +15,7 @@ function useDataString(
   const [visibleItems, setVisibleItems] = useState<number>(1)
 
   data.loader.get(visibleItems)
-  
+
   useEffect(() => {
     setVisibleItems(Math.min(100, size))
   }, [size])
@@ -29,10 +29,10 @@ function useDataString(
       setVisibleItems(visibleItems + 100)
     }
   }
-
+  
   return [
-    data.loader.visibleDataString, 
-    data.loader.dataLines, 
+    data.loader.getDataString(), 
+    data.loader.getDataLines(), 
     handleScroll
   ]
 }

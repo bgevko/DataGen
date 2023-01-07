@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Section from "../containers/Section";
-import Container from "../containers/Container";
+import { DarkModeContext } from '../../App';
 
 type SizeOptionsProps = {
   children: React.ReactNode;
@@ -9,13 +9,15 @@ type SizeOptionsProps = {
 const SizeOptions: React.FunctionComponent<SizeOptionsProps> = ({
   children,
 }) => {
+  const darkMode = useContext(DarkModeContext)
+
   return (
     <Section
       title="Set Size"
       customStyle={{
         paddingTop: "var(--half)",
         paddingBottom: "var(--one",
-        borderBottom: "var(--border-style)",
+        borderBottom: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
       }}
     >
       {children}

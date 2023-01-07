@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DarkModeContext } from "../../App";
 import Container from "../containers/Container";
 import Section from "../containers/Section";
 
@@ -9,12 +10,15 @@ type MainProps = {
 const Main: React.FunctionComponent<MainProps> = ({
   children,
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+
   return (
     <div
       className="MainSection"
       style={{
         width: "100%",
-        height: "100vh",
+        height: "95vh",
         maxWidth: "900px",
         display: "flex",
         justifyContent: "center",
@@ -28,7 +32,7 @@ const Main: React.FunctionComponent<MainProps> = ({
             justifyContent: "center",
             alignItems: "center",
             paddingTop: "var(--two)",
-            background: "var(--mist)",
+            background: (darkMode) ? "var(--brown)" : "var(--mist)",
             borderRadius: "32px",
             boxShadow: "3px 3px 21px 11px rgba(0, 0, 0, 0.13)",
           }}

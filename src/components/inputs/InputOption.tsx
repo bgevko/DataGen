@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CSSProperties } from "react";
+import { DarkModeContext } from "../../App";
 import { SelectOptions } from "../../custom_hooks/useCustomItemForm";
 
 
@@ -20,11 +21,14 @@ const InputOption: React.FunctionComponent<InputOptionProps> = ({
   customStyle = null,
   onSelect,
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+  
   const TextfieldContainerStyle: React.CSSProperties = {
     width: "96%",
     display: "flex",
-    backgroundColor: "var(--mist)",
-    border: "var(--border-style)",
+    backgroundColor: (darkMode) ? "var(--brown)" : "var(--mist)",
+    border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
     borderRadius: "var(--border-radius)",
     ...customStyle,
   };
@@ -45,11 +49,8 @@ const InputOption: React.FunctionComponent<InputOptionProps> = ({
   }
   return (
     <div style={TextfieldContainerStyle} className="textfield-container">
-      {/* <Select 
-        options={options}
-        onChange={onChangeSelect} 
-      /> */}
-      <select 
+      <select
+        className={themeClassName}
         style={selectStyle} defaultValue="Field Type"
         onChange={event => handleSelect(event.currentTarget.value)}
       >
@@ -60,7 +61,8 @@ const InputOption: React.FunctionComponent<InputOptionProps> = ({
           options?.map((option, index) => {
             let disabled = (disabledOptions?.includes(option.value))
             return (
-              <option 
+              <option
+              className={themeClassName}
               value={option.value} 
               key={index}
               disabled={disabled} 

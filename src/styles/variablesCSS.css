@@ -1,19 +1,32 @@
 
 /* Colors */
 :root {
+
+  /* Light mode */
   --mist:  #f3f3f3;
-  --rain: #d1d1d1;
+  --rain: #b8b8b8;
   --thunder: #a8a8a8;
   --smoke: #797979;
   --dull: #ececec;
+
+  /* Dark mode */
+  --sunset: #E57962;
+  --tanned: #AE7664;
+  --brown: #3F3838;
+  --dark-chocolate: #313030;
 }
 
 
 /* border */
 :root {
+  /* Light mode */
   --border-style: 1px var(--rain) solid;
   --border-dark: 1px var(--smoke) solid;
   --border-radius: 6px;
+
+  /* Dark mode */
+  --dark-mode-border-style: 1px var(--tanned) solid;
+  --dark-mode-border-active: 1px var(--sunset) solid;
 }
 
 /* distances */

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DarkModeContext } from "../../App";
 
 type SectionProps = {
   title?: string | null
@@ -11,6 +12,8 @@ const Section: React.FunctionComponent<SectionProps> = ({
   customStyle = null,
   children
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
   const defaultStyle: React.CSSProperties = {
     width: "100%",
     height: "auto",
@@ -27,7 +30,7 @@ const Section: React.FunctionComponent<SectionProps> = ({
   if (title) {
     titleElement = (
       <h2
-        className="SectionTitle"
+        className={`SectionTitle ${themeClassName}`}
         style={{
           fontWeight: "700",
           marginBottom: "var(--half)",

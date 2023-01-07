@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DarkModeContext } from "../../App";
 
 type AsideProps = {
   children: React.ReactNode
@@ -7,18 +8,21 @@ type AsideProps = {
 const Aside: React.FunctionComponent<AsideProps> = ({
   children,
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+
   return (
     <div
-      className="LeftAside"
+      className={`Aside ${themeClassName}`}
       style={{
         width: "30%",
-        height: "100vh",
+        height: "90vh",
         minWidth: "270px",
         maxWidth: "300px",
         display: "flex",
         flexDirection: "column",
         padding: "var(--one)",
-        overflow: "scroll",
+        overflow: "auto",
       }}
     >
       {children}

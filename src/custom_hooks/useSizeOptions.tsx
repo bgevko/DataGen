@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { debounce } from "../utils/debounce";
+import { MAX_ITEM_LIMIT } from "../data_logic/DataType";
 
 type SelectedSizeType = {
   [key: string]: boolean
@@ -7,10 +9,12 @@ type SelectedSizeType = {
 type SizeOptionHook = [
   size: number,
   sizeSelected: SelectedSizeType,
+  inputValue: string,
   handleSizeSelect: (option: string) => void,
-  handleCustomSize: () => void,
+  handleInputValue: (value: string) => void,
   clearSizeOptions: () => void
 ]
+let inputTimeout: NodeJS.Timeout | undefined
 
 export function useSizeOptions(): SizeOptionHook {
   const [sizeSelected, setSizeSelected] = useState<SelectedSizeType>({
@@ -24,6 +28,7 @@ export function useSizeOptions(): SizeOptionHook {
     "5000": false,
     "Other": false,
   })
+  const [inputValue, setInputValue] = useState<string>('')
   const [customSize, setCustomSize] = useState<string>('')
   const [size, setSize] = useState<number>(1)
 
@@ -36,9 +41,22 @@ export function useSizeOptions(): SizeOptionHook {
     setSizeSelected(newSelected)
   };
 
-  const handleCustomSize = () => {
-    //TODO
+  const handleInputValue = (value: string) => {
+    if (isNaN(Number(value))) return
+    if (Number(value) > MAX_ITEM_LIMIT) return
+
+    setInputValue(value.trim())
   }
+
+  useEffect(() => {
+    if (!sizeSelected["Other"]) return
+    clearTimeout(inputTimeout)
+    inputTimeout = setTimeout(() => {
+      setCustomSize(inputValue)
+      setSize(Number(inputValue))
+    }, 500)
+  }, [inputValue])
+  
 
   function clearSizeOptions() {
     setSizeSelected({
@@ -52,6 +70,8 @@ export function useSizeOptions(): SizeOptionHook {
       "5000": false,
       "Other": false,
     })
+    setInputValue('')
+    setCustomSize('')
   }
 
   useEffect(() => {
@@ -63,5 +83,5 @@ export function useSizeOptions(): SizeOptionHook {
     setSize(Number(chosenSize))
   }, [sizeSelected])
 
-  return [size, sizeSelected, handleSizeSelect, handleCustomSize, clearSizeOptions]
+  return [size, sizeSelected, inputValue, handleSizeSelect, handleInputValue, clearSizeOptions]
 }

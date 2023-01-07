@@ -2,27 +2,54 @@ import { DataLoader } from "./DataLoader";
 import { DataType } from "./DataType";
 import { clampNumber, pascalToSnakeCase } from "./helpers";
 
+// To add formats, change here and set the switch cases
+// in DataLoader
+export const Format = {
+  JSON: "JSON",
+  CSV: "CSV",
+  Array: "Array",
+  Object: "Object",
+}
+
+export const Type = {
+  FirstNames: "FirstNames",
+  LastNames: "LastNames",
+  Emails: "Emails",
+  PhoneNumbers: "PhoneNumbers",
+  StreetAddresses: "StreetAddresses",
+  Cities: "Cities",
+  Countries: "Countries",
+  ZipCodes: "ZipCodes",
+  AlphaNumerics: "AlphaNumerics",
+  Animals: "Animals",
+  Colors: "Colors",
+  Integers: "Integers",
+}
+
+export const NumericType = [Type.Integers]
+
 class Data {
   itemCount: number = 0;
   visibleTypes: Array<string> = [];
-  availableFormats: Array<string> = ["JSON", "CSV", "Javascript"];
+  availableFormats: Array<string> = Object.values(Format)
   format: string = "";
   loader: DataLoader;
   combinedDataObjects: Array<object> = [];
 
-  // To add dataSets, add here and at DataFactory
+  // To add another type, add to Type, below, and DataFactory switch case
   dataSet: { [key: string]: DataType } = {
-    FirstNames: new DataType("FirstNames"),
-    LastNames: new DataType("LastNames"),
-    Emails: new DataType("Emails"),
-    PhoneNumbers: new DataType("PhoneNumbers"),
-    StreetAddresses: new DataType("StreetAddresses"),
-    Cities: new DataType("Cities"),
-    Countries: new DataType("Countries"),
-    ZipCodes: new DataType("ZipCodes"),
-    AlphaNumerics: new DataType("AlphaNumerics"),
-    Animals: new DataType("Animals"),
-    Colors: new DataType("Colors")
+    FirstNames: new DataType(Type.FirstNames),
+    LastNames: new DataType(Type.LastNames),
+    Emails: new DataType(Type.Emails),
+    PhoneNumbers: new DataType(Type.PhoneNumbers),
+    StreetAddresses: new DataType(Type.StreetAddresses),
+    Cities: new DataType(Type.Cities),
+    Countries: new DataType(Type.Countries),
+    ZipCodes: new DataType(Type.ZipCodes),
+    AlphaNumerics: new DataType(Type.AlphaNumerics),
+    Animals: new DataType(Type.Animals),
+    Colors: new DataType(Type.Colors),
+    Integers: new DataType(Type.Integers)
   };
 
   constructor() {
@@ -51,7 +78,7 @@ class Data {
     // Set visible types to input
     for (let type of types) {
       let dataType = this.dataSet[type];
-      if (!dataType) throw new Error(`Invalid type: ${type}`);
+      if (!dataType) throw new Error(`Invalid type at Data class: ${type}`);
       dataType.setItems(this.itemCount);
     }
     this.visibleTypes = types;
@@ -65,7 +92,7 @@ class Data {
 
   setFormat(format: string): void {
     if (!this.availableFormats.includes(format))
-      throw new Error("Invalid format");
+      throw new Error("Invalid format at Data class");
     this.format = format;
   }
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DarkModeContext } from "../../App";
 
 type SidebarButtonProps = {
   title: string,
@@ -13,14 +14,19 @@ const SidebarButton: React.FunctionComponent<SidebarButtonProps> = ({
   onClick,
   copiedState
 }) => {
+  const darkMode = useContext(DarkModeContext)
   const iconDirectory: string = "/icons/";
-  const icon_path: string = `${iconDirectory}${title}-icon.png`;
+
+  // Handle dark mode icons here
+  const darkModePathModifier = (darkMode) ? "-dark" : ''
+  const icon_path: string = `${iconDirectory}${title}-icon${darkModePathModifier}.png`;
   const defaultStyle: React.CSSProperties = {
     height: "4rem",
     width: "4rem",
     cursor: "pointer",
     marginBottom: "var(--one)",
     display: "flex",
+    background: "transparent",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "12px",
@@ -41,7 +47,23 @@ const SidebarButton: React.FunctionComponent<SidebarButtonProps> = ({
     {
       copiedState 
       ? 
-      <div>{"Copied!"}</div>
+      <div
+        style={{
+          height: "100%",
+          width: "100%",
+          borderRadius: "12px",
+          color: (darkMode) ? "var(--tanned)" : "var(--smoke)",
+          border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--thunder) 1px solid",
+          background: "transparent",
+          fontSize: ".9rem",
+          fontWeight: "bold",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {"Copied!"}
+      </div>
       :
       <img 
         src={icon_path} alt={`${title} icon`}

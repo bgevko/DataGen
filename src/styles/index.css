@@ -4,7 +4,7 @@
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
+del, dfn, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -45,6 +45,28 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
   outline: none;
 }
 
+.checkbox-input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px var(--smoke) solid;
+  border-radius: 3px;
+  margin-right: .3rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* .checkbox-input[type="checkbox"]:checked {
+  background-color: var(--smoke);
+  position: relative;
+}
+
+.checkbox-input.dark-mode[type="checkbox"]:checked {
+  background-color: var(--sunset);
+  position: relative;
+} */
+
 input::placeholder {
   font-size: 16px;
   color: var(--thunder)
@@ -56,6 +78,12 @@ input[disabled]::placeholder {
 
 input:disabled {
   background-color: var(--dull) !important;
+}
+
+button:disabled {
+  color: var(--rain) !important;
+  border-color: rgb(227, 227, 227) !important;
+  cursor:not-allowed !important;
 }
 
 .textfield-container:has(input:disabled) {
@@ -85,6 +113,16 @@ table {
   border: var(--border-dark);
 }
 
+.option-item.dark-mode:checked + span {
+  background-color: var(--sunset);
+  color: var(--dark-chocolate);
+  border: var(--dark-mode-border-active);
+}
+
+/* .checkbox-input:checked + .custom-checkbox {
+  background-color: var(--smoke);
+} */
+
 .textfield-container:focus-within {
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
 }
@@ -97,11 +135,11 @@ button:hover {
   border: none
 }
 
-button:hover > img {
+button:not(.button-settings-btn):hover > img {
   filter: brightness(1.1);
 }
 
-button:active {
+button:not(.button-settings-btn):active{
   background-color: var(--smoke);
 }
 
@@ -121,4 +159,21 @@ button > div {
   display: flex;
   align-items: center;
   justify-content: center
+}
+
+.button-settings-btn {
+  background: none;
+  border: none;
+}
+
+.button-settings-btn:hover {
+  cursor: pointer;
+}
+
+.button-settings-btn:hover img{
+  filter: brightness(.9);
+}
+
+.button-settings-btn:active {
+  filter: invert(.8) brightness(1.5);
 }

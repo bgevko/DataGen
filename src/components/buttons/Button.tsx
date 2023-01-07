@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CSSProperties } from "react";
+import { DarkModeContext } from "../../App";
 
 type ButtonProps = {
   buttonTitle: string,
+  isDisabled: boolean,
   customStyle?: CSSProperties,
   onClick: () => void
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   buttonTitle,
+  isDisabled,
   customStyle,
   onClick
 }) => {
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+
   const buttonLabelStyle: React.CSSProperties = {
     width: "100%",
     height: "40px",
@@ -19,9 +25,6 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     justifyContent: "flex-start",
     alignItems: "center",
     marginBottom: "var(--half)",
-    cursor: "pointer",
-    border: "var(--border-style)",
-    borderRadius: "var(--border-radius)",
     ...customStyle,
   };
 
@@ -32,18 +35,27 @@ const Button: React.FunctionComponent<ButtonProps> = ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: (customStyle || {}).borderRadius || buttonLabelStyle.borderRadius,
+    borderRadius: (customStyle || {}).borderRadius || 'var(--border-radius)'
   };
 
   return (
-    <label className="ButtonLabel" style={buttonLabelStyle}>
-      <span 
-        style={buttonActiveStyle} 
-        className="Button"
+    <label className={`ButtonLabel ${themeClassName}`} style={buttonLabelStyle}>
+      <button 
+        style={{
+          background: 'none',
+          outline: 'none',
+          font: 'inherit',
+          border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
+          color: (darkMode) ? "var(--tanned)" : "var(--smoke)",
+          cursor: "pointer",
+          ...buttonActiveStyle
+        }} 
+        className={`Button ${themeClassName}`}
         onClick={onClick}
+        disabled={isDisabled}
       >
         <p className="ButtonText">{buttonTitle}</p>
-      </span>
+      </button>
     </label>
   );
 }

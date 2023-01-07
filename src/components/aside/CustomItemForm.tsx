@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import InputOption from "../inputs/InputOption";
 import { FormItem } from "../../custom_hooks/useCustomItemForm";
+import { DarkModeContext } from "../../App";
 
 type CustomFormProps = {
   onDelete: (formId: string) => void,
@@ -22,7 +23,10 @@ const NewItemForm: React.FunctionComponent<CustomFormProps> = ({
   disabledOptions,
   form
 }) => {
-
+  const darkMode = useContext(DarkModeContext)
+  const themeClassName = (darkMode) ? 'dark-mode' : 'light-mode'
+  
+  const darkModePathModifier = (darkMode) ? "-dark" : ""
   return (
     <div
       className={`NewItemBox`}
@@ -33,7 +37,7 @@ const NewItemForm: React.FunctionComponent<CustomFormProps> = ({
         paddingBottom: "1rem",
         paddingTop: "1rem",
         marginBottom: "1rem",
-        border: "var(--border-style)",
+        border: (darkMode) ? "var(--dark-mode-border-style)" : "var(--border-style)",
         borderRadius: "var(--border-radius)",
       }}
     >
@@ -81,7 +85,7 @@ const NewItemForm: React.FunctionComponent<CustomFormProps> = ({
             right: "0.7rem",
             cursor: "pointer",
           }}
-          src="/icons/close-icon.png"
+          src={`/icons/close-icon${darkModePathModifier}.png`}
           alt="close-icon"
         />
       </div>

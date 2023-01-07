@@ -15,7 +15,8 @@ export function useFormatOptions(): FormatOptionsHook {
   const [formatSelected, setFormatSelected] = useState<OptionsType>({
     JSON: true,
     CSV: false,
-    JavaScript: false,
+    Array: false,
+    Object: false,
   });
   const [format, setFormat] = useState<string>("JSON");
 
@@ -32,7 +33,8 @@ export function useFormatOptions(): FormatOptionsHook {
     setFormatSelected ({
       JSON: true,
       CSV: false,
-      JavaScript: false,
+      Array: false,
+      Object: false,
     })
   }
 
